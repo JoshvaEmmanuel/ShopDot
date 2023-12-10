@@ -1,0 +1,338 @@
+package org.Base;
+
+import java.io.File;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Utils.PropertiesReader;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class BaseClase {
+	public static WebDriver driver;
+	
+	
+	
+	public static WebDriver launchBrowser(String browserName) throws Exception {
+
+		try {
+			if (browserName.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Emman\\Downloads\\chromedriver-win64 (2)\\chromedriver-win64\\chromedriver.exe");
+				driver = new ChromeDriver();
+
+			} else if (browserName.equalsIgnoreCase("firefox")) {
+				WebDriverManager.firefoxdriver().setup();
+				driver = new FirefoxDriver();
+
+			} else if (browserName.equalsIgnoreCase("edge")) {
+				EdgeOptions edgeOptions = new EdgeOptions();
+				edgeOptions.setCapability("--disable-notifications", false);
+				
+//	            edgeOptions.addArguments("--disable-notifications");
+//	            edgeOptions.addArguments("--disable-web-security");
+				WebDriverManager.edgedriver().setup();
+				 driver = new EdgeDriver(edgeOptions);
+				
+			} else {
+				throw new Exception("Browser Name is invalid");
+			}
+
+			driver.manage().window().maximize();
+
+			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			return driver;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return driver;
+		
+	}
+		public static void windowMax() {
+			driver.manage().window().maximize();
+			
+
+		}
+		
+		public static WebElement waitforElementVisiblity(WebElement element) {
+			try {
+//				
+				WebDriverWait wb = new WebDriverWait(driver, 60);
+				wb.until(ExpectedConditions.visibilityOf(element));
+				return element;
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return element;
+		}
+		
+		public static WebElement waituntilClickable(WebElement element) {
+			try {
+//				
+				WebDriverWait wb = new WebDriverWait(driver, 60);
+				wb.until(ExpectedConditions.elementToBeClickable(element));
+				return element;
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return element;
+		}
+	
+
+		
+	
+		public static void launchurl(String url) {
+		try {
+			driver.get(url);
+			
+
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		} catch (Exception e) {
+
+		e.printStackTrace();
+	}
+
+ }
+		public static void selectMultiplecheckBox(WebElement element) {
+			try {
+				String attribute = element.getAttribute("checked");
+				if (attribute == null) {
+					System.out.println("Element is already checked");
+				}
+				else {
+					element.click();
+				}
+			} catch (Exception e) {
+				System.out.println("Element needs to click");
+				element.click();
+				
+			}
+			
+		}
+
+		public static void pageTitle() {
+			String title = driver.getTitle();
+			System.out.println(title);
+		}
+
+		public static void pageUrl() {
+			String currentUrl = driver.getCurrentUrl();
+			System.out.println(currentUrl);
+		}
+
+		public static void sendText(WebElement webElement, String text) {
+			((WebElement) webElement).sendKeys(text);
+		}
+
+		public static void closeEntireBrowser() {
+			driver.quit();
+		}
+
+		public static void clickBtn(WebElement we) {
+			we.click();
+		}
+
+		public static void closeWindow() {
+			driver.close();
+		}
+
+		public static void navigateBack() {
+			driver.navigate().back();
+		}
+
+		public static void navigateforward() {
+			driver.navigate().forward();
+		}
+
+		public static void navigateTo(String url) {
+			driver.navigate().to(url);
+		}
+
+		public static void navigateRefresh() {
+			driver.navigate().refresh();
+		}
+
+		public static void alertAccept() {
+			driver.switchTo().alert().accept();
+		}
+
+		public static void alertDismiss() {
+			driver.switchTo().alert().dismiss();
+		}
+
+		public static void alertGetText() {
+			String gettext = driver.switchTo().alert().getText();
+			System.out.println(gettext);
+		}
+
+		public static void alertSentKeys(String values) {
+			driver.switchTo().alert().sendKeys(values);
+		}
+
+		public static void isEnable(WebElement element) {
+			if (element.isEnabled()) {
+				System.out.println(element.isEnabled());
+			} else {
+				System.out.println("False");
+			}
+		}
+
+		public static void isDisplayed(WebElement element) {
+			if (element.isDisplayed()) {
+				System.out.println(element.isDisplayed());
+			} else {
+				System.out.println("False");
+			}
+		}
+
+		public static void isSelected(WebElement element) {
+			if (element.isSelected()) {
+				System.out.println(element.isSelected());
+			} else {
+				System.out.println("False");
+			}
+		}
+
+		
+		public static void screenShot(String imgName) throws IOException {
+			try {
+			TakesScreenshot ts = (TakesScreenshot) driver;			
+			File src = ts.getScreenshotAs(OutputType.FILE);
+			File des = new File("./ScreenShot/img.png");
+			FileUtils.copyFile(src, des);
+		}catch (WebDriverException e) {
+			e.printStackTrace();
+		}
+	}
+
+		public static void dropDown(WebElement element, String type, String value) {
+			Select s = new Select(element);
+			if (type.equalsIgnoreCase("selectbyvalue")) {
+				s.selectByValue(value);
+			} else if (type.equalsIgnoreCase("selectbyindex")) {
+				int data = Integer.parseInt(value);
+				s.selectByIndex(data);
+			} else if (type.equalsIgnoreCase("selectbyvisibletext")) {
+				s.selectByVisibleText(value);
+			}
+		}
+
+		public static Actions a;
+
+		public static void moveTheCursor(WebElement ele) {
+			a = new Actions(driver);
+			a.moveToElement(ele).perform();
+		}
+
+		public static void dragDrop(WebElement drag, WebElement drop) {
+			a = new Actions(driver);
+			a.dragAndDrop(drag, drop).perform();
+		}
+
+		public static JavascriptExecutor js;
+
+		public static void scrollThePage(WebElement we) {
+			js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true)", we);
+		}
+
+		public static void scroll(WebElement we) {
+			js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(false)", we);
+			
+
+		}
+	    public void Timewait() {
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+		}
+	    public void typeText(String text, WebElement element)  {
+	    	System.out.println(text);
+	    	
+	    	element.clear();
+	    	element.sendKeys(text);
+			
+		}
+	    
+//	}
+//		public static void excelRead(String sheetName, int rowNum, int cellNum) throws IOException {
+//	        File f = new File("excellocation.xlsx");
+//	        FileInputStream fis = new FileInputStream(f);
+//	        Workbook wb = new XSSFWorkbook(fis);
+//	        Sheet ms = wb.getSheet("Data");
+//	        Row r = ms.getRow(rowNum);
+//	        Cell c = r.getCell(cellNum);
+//	        int cellType = c.getCellType();
+//	        String value = " ";
+//	        if (cellType==1) {
+//				String value2 = c.getStringCellValue();
+//			}
+//	        else if (DateUtil.isCellDateFormatted(c)) {
+//				Date dateCellValue = c.getDateCellValue();	
+//				SimpleDateFormat sdf = new SimpleDateFormat(value);
+//				String format = sdf.format(dateCellValue);
+//				}
+//	        else {
+//	        	double d = c.getNumericCellValue();
+//				long l = (long)d;
+//			  String valueOf = String.valueOf(l);
+//			}
+//	       }
+//		public static void createNewExcel(int rowNum, int CellNum, String newData) throws IOException {
+//	        File f = new File("C:\\Users\Emman\\eclipse-workspace\\ShopDot\\Excel.xlsx");
+//	        Workbook wb = new XSSFWorkbook();
+//	        Sheet s = wb.createSheet("data");
+//	        Row r = s.createRow(rowNum);
+//	        Cell c = r.createCell(CellNum); 
+//	        c.setCellValue(newData);
+//	        FileOutputStream fos = new FileOutputStream(f);
+//	        wb.write(fos);
+//	        }
+//		public static void createCell(int rowNum, int CellNum, String newData) throws IOException {
+//	        File f = new File("C:\\Users\\Emman\\eclipse-workspace\\ShopDot\\Excel.xlsx");
+//	        FileInputStream fis = new FileInputStream(f);
+//	        Workbook wb = new XSSFWorkbook(fis);
+//	        Sheet s = wb.getSheet("data");
+//	        Row r = s.getRow(rowNum);
+//	        Cell c = r.createCell(CellNum); 
+//	        c.setCellValue(newData);
+//	        FileOutputStream fos = new FileOutputStream(f);
+//	        wb.write(fos);
+//	        }
+//		public static void createRow(int rowNum, int CellNum, String newData) throws IOException {
+//	        File f = new File("C:\\Users\\magesh\\eclipse-workspace\\allFile\\Excel\\newFile.xlsx");
+//	        FileInputStream fis = new FileInputStream(f);
+//	        Workbook wb = new XSSFWorkbook(fis);
+//	        Sheet s = wb.getSheet("data");
+//	        Row r = s.createRow(rowNum);
+//	        Cell c = r.createCell(CellNum); 
+//	        c.setCellValue(newData);
+//	        FileOutputStream fos = new FileOutputStream(f);
+//	        wb.write(fos);
+//	        }
+	//}
+
+  }
+
