@@ -6,10 +6,11 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-.settings
+ShopDot/.settings
 driver
 RetailerReport
 ScreenShot
 Report
 target
 .idea
+/bin/
