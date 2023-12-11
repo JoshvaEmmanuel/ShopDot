@@ -56,9 +56,7 @@ public class GettingPaid extends BaseClase{
 	
 	@When("user clicks on gettingpaid menu")
 	public void user_clicks_on_gettingpaid_menu() throws InterruptedException {
-		
 		try {
-
 			WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Getting Paid']"));
             // Attempt to click the element
             element.click();
@@ -67,7 +65,6 @@ public class GettingPaid extends BaseClase{
             // Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
         	WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Getting Paid']"));
         	JavascriptExecutor executor = (JavascriptExecutor)driver;
-        	
             executor.executeScript("arguments[0].click();", element);
         }
 	}
