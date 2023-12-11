@@ -1,0 +1,158 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 1655152600,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "user launch the browser and Maximize window",
+            "match": {
+              "location": "Brands.user_launch_the_browser_and_Maximize_window()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 19613924700,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "to hit the Shopdot Url",
+            "match": {
+              "location": "Brands.to_hit_the_Shopdot_Url()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3482255100,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "user login to the Shopdot Application",
+            "match": {
+              "location": "Brands.user_login_to_the_Shopdot_Application()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 17063049700,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "click on the Brands menu",
+            "match": {
+              "location": "Brands.click_on_the_Brands_menu()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2023-12-10T17:06:56.826Z",
+        "line": 13,
+        "name": "Sending request to the Brand",
+        "description": "",
+        "id": "validating-brands-menu-functionality;sending-request-to-the-brand",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 6182572600,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "the user is on the Brand Listing page",
+            "match": {
+              "location": "Brands.the_user_is_on_the_Brand_Listing_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5226242500,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user select a Brands and click on the connect button",
+            "match": {
+              "location": "Brands.user_select_a_Brands_and_click_on_the_connect_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1312451400,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "displays the sucessful message \"Connect Request Sent Successfully!\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Connect Request Sent Successfully!\"",
+                  "offset": 31
+                }
+              ],
+              "location": "Brands.displays_the_sucessful_message(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 72754700,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "click on the close button in the popup",
+            "match": {
+              "location": "Brands.click_on_the_close_button_in_the_popup()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4035922300,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "Status changes to \"Pending\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Pending\"",
+                  "offset": 18
+                }
+              ],
+              "location": "Brands.status_changes_to(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@BL001"
+          }
+        ]
+      }
+    ],
+    "name": "Validating Brands Menu functionality",
+    "description": "         As a Retailer, I want to be able to view the list of brands, so that I would know what is available for me",
+    "id": "validating-brands-menu-functionality",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/RetailerPages/Brands.feature",
+    "tags": []
+  }
+]

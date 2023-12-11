@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="58.711319">
+    <testcase classname="Validating Brands Menu functionality" name="Sending request to the Brand" time="58.711319">
+        <system-out><![CDATA[Given user launch the browser and Maximize window...........................passed
+When to hit the Shopdot Url.................................................passed
+And user login to the Shopdot Application...................................passed
+And click on the Brands menu................................................passed
+And the user is on the Brand Listing page...................................passed
+And user select a Brands and click on the connect button....................passed
+And displays the sucessful message "Connect Request Sent Successfully!".....passed
+And click on the close button in the popup..................................passed
+Then Status changes to "Pending"............................................passed
+]]></system-out>
+    </testcase>
+</testsuite>
