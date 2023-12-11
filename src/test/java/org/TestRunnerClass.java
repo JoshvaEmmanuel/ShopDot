@@ -1,4 +1,4 @@
-package org.setpdefinition;
+package org;
 
 import org.junit.runner.RunWith;
 
