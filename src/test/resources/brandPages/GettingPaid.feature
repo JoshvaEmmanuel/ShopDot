@@ -1,7 +1,7 @@
 Feature: Validating gettingPaid menu functionality
   
   Background:
- Given user Launch the Browser and Maximize the window
+ Given user Launch the "firefox" Browser and Maximize the window
  When user launch the Shopdot URL
  And user Login to the ShopDot
  And user clicks on gettingpaid menu 

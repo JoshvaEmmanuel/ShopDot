@@ -33,7 +33,7 @@ public class BaseClase {
 
 		try {
 			if (browserName.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Emman\\Downloads\\chromedriver-win64 (2)\\chromedriver-win64\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Jeeva\\Downloads\\chrome-win64\\chrome-win64\\chromedriver.exe");
 				driver = new ChromeDriver();
 
 			} else if (browserName.equalsIgnoreCase("firefox")) {
@@ -55,7 +55,7 @@ public class BaseClase {
 
 			driver.manage().window().maximize();
 
-			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			return driver;
 
 		} catch (Exception e) {
