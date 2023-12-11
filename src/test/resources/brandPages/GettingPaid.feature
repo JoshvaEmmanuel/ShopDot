@@ -1,7 +1,7 @@
 Feature: Validating gettingPaid menu functionality
   
   Background:
- Given user Launch the Browser and Maximize the window
+ Given user Launch the "firefox" Browser and Maximize the window
  When user launch the Shopdot URL
  And user Login to the ShopDot
  And user clicks on gettingpaid menu 
@@ -17,14 +17,14 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Doing business as field
    And user select option in the Business category field
    And user enter address in the Business website address field
-   And user select Tax ID Type from Tax ID Type field
+   And user select Tax ID "SINGLE_MEMBER_LLC" Type from Tax ID Type field
    And user enter data in the EIN field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select country from Country field
-   And user select sate from the select State field
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user select state from the State of incorporation field
@@ -68,17 +68,17 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Doing business as field
    And user select option in the Business category field
    And user enter address in the Business website address field
-   And user select Tax ID Type as Social Security Number (SSN)
+   And user select Tax ID Type as "Social Security Number (SSN)"
    And user enter data in the SSN field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select country from Country field
-   And user select sate from the select State field
-   And user enter city name in the City Field
+   And user select "Alabama" sate from the select State field
+   And user enter city name in the City Field `
    And user enter zipcode in the ZIP field
-   And user select state from the State of incorporation field
+      And user select "Alabama" sate incorporaion from the select State field
    And user select date in the Date of incorporation field
    And user enter data in the Estimated average sales volume on ShopDot field
    And user enter data in the Estimated average wholesale price on ShopDot field

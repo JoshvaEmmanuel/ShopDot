@@ -38,18 +38,19 @@ public class BaseClase {
 
 			} else if (browserName.equalsIgnoreCase("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
-				driver = new FirefoxDriver();
+				driver = new FirefoxDriver();}
 
-			} else if (browserName.equalsIgnoreCase("edge")) {
-				EdgeOptions edgeOptions = new EdgeOptions();
-				edgeOptions.setCapability("--disable-notifications", false);
-				
-//	            edgeOptions.addArguments("--disable-notifications");
-//	            edgeOptions.addArguments("--disable-web-security");
-				WebDriverManager.edgedriver().setup();
-				 driver = new EdgeDriver(edgeOptions);
-				
-			} else {
+//			} else if (browserName.equalsIgnoreCase("edge")) {
+//				EdgeOptions edgeOptions = new EdgeOptions();
+//				edgeOptions.setCapability("--disable-notifications", false);
+//				
+////	            edgeOptions.addArguments("--disable-notifications");
+////	            edgeOptions.addArguments("--disable-web-security");
+//				WebDriverManager.edgedriver().setup();
+//				 driver = new EdgeDriver(edgeOptions);
+//				
+//			} 
+				else {
 				throw new Exception("Browser Name is invalid");
 			}
 
@@ -89,8 +90,8 @@ public class BaseClase {
 			try {
 //				
 				WebDriverWait wb = new WebDriverWait(driver, 60);
-				wb.until(ExpectedConditions.elementToBeClickable(element));
-				return element;
+				wb.until(ExpectedConditions.elementToBeClickable(element)).click();;
+			
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -253,16 +254,14 @@ public class BaseClase {
 
 		public static JavascriptExecutor js;
 
-		public static void scrollThePage(WebElement we) {
+		public static void scrollToTheElement(WebElement element) {
 			js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView(true)", we);
+			js.executeScript("arguments[0].scrollIntoView(true)", element);
 		}
 
 		public static void scroll(WebElement we) {
 			js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView(false)", we);
-			
-
 		}
 	    public void Timewait() {
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

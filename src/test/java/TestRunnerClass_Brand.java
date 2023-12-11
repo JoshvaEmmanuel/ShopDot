@@ -1,5 +1,3 @@
-package org.setpdefinition;
-
 import org.junit.runner.RunWith;
 
 import io.cucumber.junit.Cucumber;
@@ -10,6 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 monochrome = true,dryRun = false,
 plugin ={"pretty","html:target/Cucumber-HTML-report/report.html", "junit:target/Cucumber-junit/junitreport.xml", "json:target/Cucumber-Jason-report/jsonreport.json"}
 ,tags = "@GP002")
+
 
 public class TestRunnerClass_Brand {
 
