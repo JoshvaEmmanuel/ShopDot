@@ -76,9 +76,9 @@ Feature: Validating gettingPaid menu functionality
    And user enetr address in the Address line2 field
    And user select country from Country field
    And user select "Alabama" sate from the select State field
-   And user enter city name in the City Field `
+   And user enter city name in the City Field
    And user enter zipcode in the ZIP field
-      And user select "Alabama" sate incorporaion from the select State field
+      And user select "California" sate incorporaion from the select State field
    And user select date in the Date of incorporation field
    And user enter data in the Estimated average sales volume on ShopDot field
    And user enter data in the Estimated average wholesale price on ShopDot field

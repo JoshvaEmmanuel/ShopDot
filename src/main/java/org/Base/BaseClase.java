@@ -1,17 +1,13 @@
 package org.Base;
 
 import java.io.File;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -33,12 +29,16 @@ public class BaseClase {
 
 		try {
 			if (browserName.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Emman\\Downloads\\chromedriver-win64 (2)\\chromedriver-win64\\chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "C:\\Users\\Emman\\Downloads\\chromedriver-win64 (2)\\chromedriver-win64\\chromedriver.exe");
 				driver = new ChromeDriver();
 
 			} else if (browserName.equalsIgnoreCase("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
-				driver = new FirefoxDriver();}
+				driver = new FirefoxDriver();
+				driver.manage().window().setSize(new Dimension(1920, 1080)); // Set your desired window size
+
+			}
+
 
 //			} else if (browserName.equalsIgnoreCase("edge")) {
 //				EdgeOptions edgeOptions = new EdgeOptions();
@@ -94,8 +94,8 @@ public class BaseClase {
 			
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
 			}
 			return element;
 		}

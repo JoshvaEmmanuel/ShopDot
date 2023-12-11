@@ -108,12 +108,8 @@ public class GettingPaid extends BaseClase{
 
 	@When("user select option in the Business category field")
 	public void user_select_option_in_the_Business_category_field() throws InterruptedException, AWTException {
-		driver.findElement(By.xpath("//div[@class='form-input mb-4 business_category']//div[@class='select__indicator select__dropdown-indicator css-1xc3v61-indicatorContainer']//*[name()='svg']")).click();
-
-
-	    Robot r = new Robot();
-	    r.keyPress(KeyEvent.VK_ENTER);
-	    r.keyRelease(KeyEvent.VK_ENTER);
+		driver.findElement(By.xpath("//div[text()='Select Business Category']/parent::div/following-sibling::div/child::div/child::*[name()='svg']")).click();
+		driver.findElement(By.xpath("//div[text()='Single Member LLC']")).click();
 	}
 
 	@When("user enter address in the Business website address field")
@@ -121,15 +117,13 @@ public class GettingPaid extends BaseClase{
 		driver.findElement(By.xpath("//input[@name='website']")).sendKeys(faker.company().url());
 	}
 
-//	@When("user select Tax ID Type from Tax ID Type field")
-//	public void user_select_Tax_ID_Type_from_Tax_ID_Type_field() throws InterruptedException, AWTException {
-//
-//		driver.findElement(By.cssSelector("[value='SINGLE_MEMBER_LLC'])"
-//
-//	    Robot r = new Robot();
-//	    r.keyPress(KeyEvent.VK_ENTER);
-//	    r.keyRelease(KeyEvent.VK_ENTER);
-//	}
+
+
+	@When("user select {string} sate incorporaion from the select State field")
+	public void user_select_sate_incorporaion_from_the_select_State_field(String state) {
+		driver.findElement(By.xpath("//div[text()='Select State']/parent::div/following-sibling::div/child::div/child::*[name()='svg']")).click();
+	waituntilClickable(driver.findElement(By.xpath("//div[text()='"+state+"']")));
+	}
 	@When("user select Tax ID {string} Type from Tax ID Type field")
 	public void userSelectTaxIDTypeFromTaxIDTypeField(String idType) {
 		driver.findElement(By.cssSelector("[value='"+idType+"']"
@@ -176,7 +170,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user select {string} sate from the select State field")
 	public void user_select_sate_from_the_select_State_field(String state) {
-		driver.findElement(By.xpath("//div[text()='//div[text()='Select State']']")).click();
+		driver.findElements(By.xpath("//div[text()='Select State']/parent::div/following-sibling::div/child::div/child::*[name()='svg']")).get(0).click();
 		driver.findElement(By.xpath("//div[text()='"+state+"']")).click();
 	}
 
@@ -300,9 +294,6 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 	@When("user click on the save button")
 	public void user_click_on_the_save_button() throws InterruptedException {
 		
-	    driver.findElement(By.xpath("//button[normalize-space()='Save and Next']")).click();
-	    driver.findElement(By.xpath("//a[normalize-space()='Business Details']")).click();
-	    SSNValue = driver.findElement(By.xpath("//input[@placeholder='123-44-5678']")).getAttribute("value");
 	    driver.findElement(By.xpath("//button[normalize-space()='Save and Next']")).click();
 	}
 
@@ -901,7 +892,8 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@And("user select Tax ID Type as {string}")
 	public void userSelectTaxIDTypeAs(String taxID) {
-		driver.findElement(By.xpath("//div[text()='Select Text ID']")).click();
+		scrollToTheElement(driver.findElement(By.xpath("//label[contains(text(),'Tax ID Type')]/following-sibling::div")));
+		driver.findElement(By.xpath("//label[contains(text(),'Tax ID Type')]/following-sibling::div")).click();
 		driver.findElement(By.xpath("//div[text()='"+taxID+"']")).click();
 
 	}
