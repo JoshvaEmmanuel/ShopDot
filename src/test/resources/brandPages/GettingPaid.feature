@@ -13,7 +13,7 @@ Feature: Validating gettingPaid menu functionality
  @GP001
    Scenario: Validating Getting Paid Business category as Single member LLC
    
-   And user enter data on the Legal name of business field
+   And user enter data on the Legal nameŌ of business field
    And user enter data on the Doing business as field
    And user select option in the Business category field
    And user enter address in the Business website address field
