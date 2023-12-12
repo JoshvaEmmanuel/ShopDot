@@ -119,7 +119,8 @@ public class BaseClase {
 		public static void selectMultiplecheckBox(WebElement element) {
 			try {
 				String attribute = element.getAttribute("checked");
-				if (attribute == null) {
+				System.out.println(attribute);
+				if (attribute .equalsIgnoreCase("true") ){
 					System.out.println("Element is already checked");
 				}
 				else {

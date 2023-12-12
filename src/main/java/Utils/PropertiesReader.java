@@ -11,7 +11,7 @@ public class PropertiesReader {
 
     public PropertiesReader() {
         try {
-            FileReader reader = new FileReader("C:/Users/Emman/eclipse-workspace/ShopdotApplication/config.properties");
+            FileReader reader = new FileReader("config.properties");
             props = new Properties();
             props.load(reader);
         } catch (FileNotFoundException e) {

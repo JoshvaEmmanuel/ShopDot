@@ -1,37 +1,33 @@
 package org.setpdefinition;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-
-import io.cucumber.java.en.And;
-import org.Base.BaseClase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.pojo.pojoSignInpage;
-
-import com.github.javafaker.Faker;
-
 import Utils.PropertiesReader;
+import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
+import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.pojo.pojoSignInpage;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+
+import static org.testng.Assert.*;
 
 public class GettingPaid extends BaseClase{
 	 String SSNValue;
 	public Faker faker; 
 	public PropertiesReader propertiyReader =null ;
+	private static final Logger logger = LogManager.getLogger(GettingPaid.class);
 	@Given("user Launch the {string} Browser and Maximize the window")
 	public void userLaunchTheBrowserAndMaximizeTheWindow(String browserName) throws Exception {
-		System.out.println("name:"+ browserName);
+		logger.info("name:"+ browserName);
 		driver=launchBrowser(browserName);
 		propertiyReader=new PropertiesReader();
 	}
@@ -49,8 +45,8 @@ public class GettingPaid extends BaseClase{
 	@When("user Login to the ShopDot")
 	public void user_Login_to_the_ShopDot() {
 		pojoSignInpage g = new pojoSignInpage(driver);
-	    sendText(g.getEmail(), "testsample1@yopmail.com");
-	    sendText(g.getPassword(), "Welcome6@123");
+	    sendText(g.getEmail(), propertiyReader.getProperty("GETTING_PAID_USER"));
+	    sendText(g.getPassword(), propertiyReader.getProperty("GETTING_PAID_PASSWORD"));
 	    clickBtn(g.getLogin());
 	}
 	
@@ -75,14 +71,18 @@ public class GettingPaid extends BaseClase{
 		  assertEquals(text, "Getting Paid");
 	}
 
-	@When("user selects the option No from the Is your business a publicly traded C_Corporation or non-profit?")
-	public void user_selects_the_option_No_from_the_Is_your_business_a_publicly_traded_C_Corporation_or_non_profit() {
-		driver.findElement(By.xpath("//div[@class='form-input return_select-item radio-business radio-row mt-4']//label[2]//div[1]")).click();
+	@When("user selects the option {string} from the Is your business a publicly traded C_Corporation or non-profit?")
+	public void user_selects_the_option_from_the_Is_your_business_a_publicly_traded_C_Corporation_or_non_profit(String string) {
+		System.out.println("//input[@value='"+string+"']");
+		driver.findElement(By.xpath("//input[@value='"+string.toLowerCase()+"']")).click();
+
+
 	}
 
-	@When("user selects the option Yes from the Are you an authorized signer?")
-	public void user_selects_the_option_Yes_from_the_Are_you_an_authorized_signer() {
-		 driver.findElement(By.xpath("//div[@class='form-input return_select-item radio-authorizedsign radio-row border-botton-none']//label[1]//div[1]")).click();
+	@When("user selects the option {string} from the Are you an authorized signer?")
+	public void user_selects_the_option_from_the_Are_you_an_authorized_signer(String string) {
+		driver.findElements(By.xpath("//span[text()='"+string+"']")).get(1).click();
+
 	}
 
 	@When("user click on the Start Application button")
@@ -176,7 +176,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user enter city name in the City Field")
 	public void user_enter_city_name_in_the_City_Field() {
-		driver.findElement(By.xpath("//input[@placeholder='New York']")).sendKeys("NY");
+		driver.findElement(By.xpath("//input[@placeholder='New York']")).sendKeys(faker.address().cityName());
 	}
 
 	@When("user enter zipcode in the ZIP field")
@@ -198,7 +198,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 	        
 	    } catch (Exception e) {
 	        // Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
-	    	WebElement element = driver.findElement(By.xpath("(//div[@id='react-select-9-placeholder']"));
+	    	WebElement element = driver.findElement(By.xpath("//div[@id='react-select-9-placeholder']"));
 	    	JavascriptExecutor executor = (JavascriptExecutor)driver;
 	    	
 
@@ -464,7 +464,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user enter data in the SSN field")
 	public void user_enter_data_in_the_SSN_field() {
-	    driver.findElements(By.xpath("//input[@type='tel']")).get(0).sendKeys("680279914");
+	    driver.findElements(By.xpath("//input[@type='tel']")).get(0).sendKeys(propertiyReader.getProperty("SSN_VALUE"));
 
 	}
 

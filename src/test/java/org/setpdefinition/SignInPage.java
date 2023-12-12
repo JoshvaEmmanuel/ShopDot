@@ -16,13 +16,6 @@ import io.cucumber.java.en.When;
 public class SignInPage extends BaseClase{
 	public PropertiesReader propertiyReader = null;
 	pojoSignInpage p;
-	@Given("User launch the browser and Maximize window")
-	public void user_launch_the_browser_and_Maximize_window() throws Exception {
-		launchBrowser("chrome");
-	    windowMax();
-	    propertiyReader=new PropertiesReader();
-	}
-	
 
 	@When("To launch the Shopdot URL")
 	public void To_launch_the_Shopdot_URL() throws InterruptedException {
@@ -31,6 +24,7 @@ public class SignInPage extends BaseClase{
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		driver.manage().deleteAllCookies();
+		propertiyReader=new PropertiesReader();
 	}
 
 	@When("User has to pass the data {string} in the Email field")
@@ -90,13 +84,13 @@ public class SignInPage extends BaseClase{
 	    closeEntireBrowser();
 	}
 	
-	@When("User enter the valid EmailId {string} in the emailid field")
-	public void user_enter_the_valid_EmailId_in_the_emailid_field(String string) {
+	@When("User enter the valid EmailId in the emailid field")
+	public void user_enter_the_valid_EmailId_in_the_emailid_field() {
 	    driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("signemail"));
 	}
 
-	@When("User enter the Valid Password {string} in the Password field")
-	public void user_enter_the_Valid_Password_in_the_Password_field(String string) {
+	@When("User enter the Valid Password in the Password field")
+	public void user_enter_the_Valid_Password_in_the_Password_field() {
 	    driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 	}
 
