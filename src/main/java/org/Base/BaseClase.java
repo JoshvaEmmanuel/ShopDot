@@ -38,18 +38,6 @@ public class BaseClase {
 				driver.manage().window().setSize(new Dimension(1920, 1080)); // Set your desired window size
 
 			}
-
-
-//			} else if (browserName.equalsIgnoreCase("edge")) {
-//				EdgeOptions edgeOptions = new EdgeOptions();
-//				edgeOptions.setCapability("--disable-notifications", false);
-//				
-////	            edgeOptions.addArguments("--disable-notifications");
-////	            edgeOptions.addArguments("--disable-web-security");
-//				WebDriverManager.edgedriver().setup();
-//				 driver = new EdgeDriver(edgeOptions);
-//				
-//			} 
 				else {
 				throw new Exception("Browser Name is invalid");
 			}
@@ -86,9 +74,12 @@ public class BaseClase {
 			return element;
 		}
 		
-		public static WebElement waituntilClickable(WebElement element) {
+		public static WebElement
+
+		waituntilClickable(WebElement element) {
 			try {
-//				
+//
+
 				WebDriverWait wb = new WebDriverWait(driver, 60);
 				wb.until(ExpectedConditions.elementToBeClickable(element)).click();;
 			

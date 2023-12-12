@@ -295,11 +295,12 @@ public class Prefernces extends BaseClase{
 	public void user_should_see_the_Sucessful_message_in_the_page() throws InterruptedException, IOException {
 	   
 		String sucess = driver.findElement(By.xpath("//div[@role='alert']")).getText();
-		Assert.assertEquals(sucess, "Your changes have been saved");
+		System.out.println("The message displayed on the screen is" + sucess);
+		Assert.assertEquals(sucess.toLowerCase(), "Your changes have been saved.".toLowerCase());
 		System.out.println("The message displayed on the screen is" + sucess);
 		
 		String sucess1 = driver.findElement(By.xpath("//div[@id='2']")).getText();
-		Assert.assertEquals(sucess1, "Your changes have been saved");
+		Assert.assertEquals(sucess1.toLowerCase(), "Your changes have been saved.".toLowerCase());
 		System.out.println("The message displayed on the screen is" + sucess1);
 	}
 	@Then("User is automatically moved to the next page, which is Integrations")

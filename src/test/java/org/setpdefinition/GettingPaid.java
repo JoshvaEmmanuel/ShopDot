@@ -24,12 +24,18 @@ public class GettingPaid extends BaseClase{
 	 String SSNValue;
 	public Faker faker; 
 	public PropertiesReader propertiyReader =null ;
-	private static final Logger logger = LogManager.getLogger(GettingPaid.class);
+	public  static Logger log;
+
+	public GettingPaid(){
+	  log= LogManager.getLogger(GettingPaid.class);
+		propertiyReader=new PropertiesReader();
+		faker=new Faker();
+	}
+
 	@Given("user Launch the {string} Browser and Maximize the window")
 	public void userLaunchTheBrowserAndMaximizeTheWindow(String browserName) throws Exception {
-		logger.info("name:"+ browserName);
 		driver=launchBrowser(browserName);
-		propertiyReader=new PropertiesReader();
+		log.info("Browser successfully launched");
 	}
 //
 //	@Given("user Launch the Browser and Maximize the window")
@@ -94,7 +100,7 @@ public class GettingPaid extends BaseClase{
 	
 	@When("user enter data on the Legal name of business field")
 	public void user_enter_data_on_the_Legal_name_of_business_field() {
-		faker=new Faker();
+
 		driver.findElement(By.xpath("//input[@name='businessName']")).sendKeys(faker.company().name()+"testbusiness");
 	}
 

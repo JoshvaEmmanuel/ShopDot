@@ -13,7 +13,9 @@ Feature: Validating the Onboarding
     #Then User should navigate to the Verify Your Email page
     #But user should not be in Signup Page
     
-	 Scenario: Login with Valid Credential
+
+	Scenario: Login with Valid Credential
+
 		 Given user Launch the "firefox" Browser and Maximize the window
     When To launch the Shopdot URL
 	  And User enter the valid EmailId in the emailid field

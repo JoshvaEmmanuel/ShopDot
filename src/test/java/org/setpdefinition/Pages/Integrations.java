@@ -73,21 +73,19 @@ public class Integrations extends BaseClase{
 //003
 	@When("user enter Store name")
 	public void user_enter_Store_name() throws InterruptedException {
-		propertiyReader=new PropertiesReader();
 
+		propertiyReader=new PropertiesReader();
+		System.out.println("Entred store Name: ");
+		Thread.sleep(2000);
 		System.out.println(propertiyReader.getProperty("Intgirationuser"));
 	    driver.findElement(By.xpath("//input[@type='text']")).sendKeys(propertiyReader.getProperty("Intgirationuser"));
-	    System.out.println("Entred store Name: ");
+
 	}
 
 	@When("user click on the Connect button")
 	public void user_click_on_the_Connect_button() throws InterruptedException {
-		
-		
-		boolean cb = driver.findElement(By.xpath("//button[normalize-space()='Connect']")).isEnabled();
-		System.out.println(cb);
-		
-	    waituntilClickable(driver.findElement(By.xpath("//button[normalize-space()='Connect']"))).click();
+		Thread.sleep(2000);
+	    waituntilClickable(driver.findElement(By.xpath("//button[text()='Connect']"))).click();
 	}
 
 	@When("user should see the sucessful message on the page")
@@ -101,47 +99,17 @@ public class Integrations extends BaseClase{
 //	}
 	@When("user Login to the Shopify")
 	public void user_Login_to_the_Shopify() throws InterruptedException {
-		
+	Thread.sleep(4000);
+		if(driver.getCurrentUrl().contains("/admin/oauth/authorize?")){
+			waituntilClickable(driver.findElement(By.xpath("//span[text()='Sign up for Shopify']")));
+		waituntilClickable(driver.findElement(By.xpath("//a[text()='Log in']")));
+		}
 		driver.findElement(By.xpath("//input[@id='account_email']")).sendKeys(propertiyReader.getProperty("shopifyuser"));
-		
-		
-//		driver.findElement(By.xpath("//button[@name='commit']")).click();
+Thread.sleep(2000);
+		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']")));
+	    driver.findElement(By.xpath("//input[@id='account_password']")).sendKeys(propertiyReader.getProperty("shopifypass"));
+	    Thread.sleep(2000);
 		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']"))).click();
-//		 try {
-//
-//				WebElement element = driver.findElement(By.xpath("//span[@class='ui-button__text']"));
-//	            // Attempt to click the element
-//	            element.click();
-//	            
-//	        } catch (Exception e) {
-//	            // Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
-//	        	WebElement element = driver.findElement(By.xpath("//span[@class='ui-button__text']"));
-//	        	JavascriptExecutor executor = (JavascriptExecutor)driver;
-//	        	
-////	            JavascriptExecutor executor = (JavascriptExecutor) driver;
-//	            executor.executeScript("arguments[0].click();", element);
-//	        }
-	    
-	    Thread.sleep(1500);
-	    driver.findElement(By.xpath("//input[@id='account_password']")).sendKeys(propertiyReader.getProperty("shopifypass"));  
-	    waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']"))).click();
-//	    driver.findElement(By.xpath("//button[@name='commit']")).click();
-	    
-//	    try {
-//
-//			WebElement element = driver.findElement(By.xpath("//button[@name='commit']"));
-//            // Attempt to click the element
-//            element.click();
-//            
-//        } catch (Exception e) {
-//            // Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
-//        	WebElement element = driver.findElement(By.xpath("//button[@name='commit']"));
-//        	JavascriptExecutor executor = (JavascriptExecutor)driver;
-//        	
-////            JavascriptExecutor executor = (JavascriptExecutor) driver;
-//            executor.executeScript("arguments[0].click();", element);
-//        }
-	    
 	    driver.findElement(By.xpath("//div[@class='Polaris-Box_375yx Polaris-Box--printHidden_15ag0']//span[@class='Polaris-Button__Text_yj3uv'][normalize-space()='Add unlisted sales channel']")).click();
 	       
 	    
