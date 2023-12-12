@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(features ="src/test/resources/brandPages", glue = "org.setpdefinition",
 monochrome = true,dryRun = false,
 plugin ={"pretty","html:target/Cucumber-HTML-report/report.html", "junit:target/Cucumber-junit/junitreport.xml", "json:target/Cucumber-Jason-report/jsonreport.json"}
-,tags = "@GP002")
+,tags = "@onboarding")
 
 
 public class TestRunnerClass_Brand {
