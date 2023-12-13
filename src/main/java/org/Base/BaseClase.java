@@ -2,9 +2,12 @@ package org.Base;
 
 import java.io.File;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
@@ -19,13 +22,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Utils.PropertiesReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.pojo.pojoSignInpage;
 
 public class BaseClase {
 	public static WebDriver driver;
-	
-	
-	
-	public static WebDriver launchBrowser(String browserName) throws Exception {
+	public  pojoSignInpage pojoSignInpage;
+	public Logger logger;
+
+	public JavascriptExecutor jsExecutor;
+
+
+	public BaseClase(){
+		pojoSignInpage =new pojoSignInpage(driver);
+		logger= LogManager.getLogger(BaseClase.class);
+		 jsExecutor = (JavascriptExecutor) driver;
+
+	}
+	public  WebDriver launchBrowser(String browserName) throws Exception {
+
 
 		try {
 			if (browserName.equalsIgnoreCase("chrome")) {
@@ -59,6 +73,7 @@ public class BaseClase {
 			
 
 		}
+
 		
 		public static WebElement waitforElementVisiblity(WebElement element) {
 			try {
@@ -90,10 +105,7 @@ public class BaseClase {
 			}
 			return element;
 		}
-	
 
-		
-	
 		public static void launchurl(String url) {
 		try {
 			driver.get(url);
@@ -260,13 +272,14 @@ public class BaseClase {
 
 		}
 	    public void typeText(String text, WebElement element)  {
-	    	System.out.println(text);
-	    	
-	    	element.clear();
+			logger.info("Entering Text:"+text);
+			waitforElementVisiblity(element);
+			logger.info("Clearing input field");
+			jsExecutor.executeScript("arguments[0].value='';", element);
+
 	    	element.sendKeys(text);
-			
 		}
-	    
+
 //	}
 //		public static void excelRead(String sheetName, int rowNum, int cellNum) throws IOException {
 //	        File f = new File("excellocation.xlsx");
@@ -324,6 +337,45 @@ public class BaseClase {
 //	        wb.write(fos);
 //	        }
 	//}
+
+	public void logInShopDot(String username, String password){
+        logger.info("Entering Username as:"+username);
+		sendText(pojoSignInpage.getEmail(), username);
+		logger.info("Entering Username as:"+password);
+		sendText(pojoSignInpage.getPassword(), password);
+		logger.info("Clicking on Log in button");
+		clickBtn(pojoSignInpage.getLogin());
+	}
+
+	public static String generateRandomcharacter() {
+		// Specify the characters allowed in the email address
+		String allowedCharacters = "abcdefghijklmnopqrstuvwxyz0123456789_-,#$^&*.";
+
+		int emailLength = 2;
+		StringBuilder randomEmail = new StringBuilder();
+
+		Random random = new Random();
+		for (int i = 0; i < emailLength; i++) {
+			int randomIndex = random.nextInt(allowedCharacters.length());
+			char randomChar = allowedCharacters.charAt(randomIndex);
+			randomEmail.append(randomChar);
+		}
+		randomEmail.append("$");
+		return randomEmail.toString();
+	}
+
+// This method is used to give random integer
+	public static int generateRandomNumber(int min, int max) {
+		// Create a Random object
+		Random random = new Random();
+
+		// Generate a random number within the specified range [min, max]
+		return random.nextInt(max - min + 1) + min;
+	}
+
+	public String getAbsolutePath(String relativePath){
+			return new File(relativePath).getAbsolutePath();
+	}
 
   }
 
