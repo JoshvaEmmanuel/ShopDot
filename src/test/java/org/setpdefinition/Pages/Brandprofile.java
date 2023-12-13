@@ -152,7 +152,7 @@ else {
 	@When("user upload the logo in the Upload logo field")
 	public void user_upload_the_logo_in_the_Upload_logo_field() throws InterruptedException, AWTException, IOException {
 		
-		driver.findElement(By.xpath("//input[@type='file']")).sendKeys("D:\\ShopDot\\test.jpg");
+		driver.findElement(By.xpath("//input[@type='file']")).sendKeys("C:/Users/Emman/Downloads/download (5).jpeg");
    
 	}
 	@When("user enter brand name in the Brand name filed")
@@ -171,7 +171,7 @@ else {
 	@When("user selects three Brand category from the Brand category field")
 	public void user_selects_three_Brand_category_from_the_Brand_category_field() throws InterruptedException {
 		
-		selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[1]")));
+		selectMultiplecheckBox(driver.findElement(By.xpath("((//input[@name='brand_categories'])[1]"))); 
         selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[2]")));  
 	    selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[3]")));
 	    Thread.sleep(2000);
