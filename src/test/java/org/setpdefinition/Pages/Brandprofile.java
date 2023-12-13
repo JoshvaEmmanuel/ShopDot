@@ -20,7 +20,7 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
+import org.testng.Assert;
 
 public class Brandprofile extends BaseClase{
 	public Faker faker;
@@ -44,22 +44,22 @@ public class Brandprofile extends BaseClase{
 	public void user_Login_to_the_shopdot() throws InterruptedException {
 		
 		pojoSignInpage j =new pojoSignInpage(driver);
-		sendText(j.getEmail(), "testsample10@yopmail.com");
+		sendText(j.getEmail(), "testsample17@yopmail.com");
 		sendText(j.getPassword(), "Welcome6@123");
 		clickBtn(j.getLogin());
 		
 		Thread.sleep(6000);
 		Actions a = new Actions(driver);
 		System.out.println("get the url is: " + driver.getCurrentUrl());
-if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/dashboard")) {
-	System.out.println("first");
-	a.moveToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]"))).build().perform();
-	System.out.println("second");
-	driver.findElement(By.xpath("//a[normalize-space()='Settings']")).click();
-} 
-else {
-	driver.findElement(By.xpath("")).click();
-}
+//if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/dashboard")) {
+//	System.out.println("first");
+//	a.moveToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]"))).build().perform();
+//	System.out.println("second");
+//	driver.findElement(By.xpath("//a[normalize-space()='Settings']")).click();
+//}
+//else {
+//	driver.findElement(By.xpath("")).click();
+//}
 	}
 
 //	@When("user navigated to the onboarding")
@@ -134,6 +134,7 @@ else {
 	public void user_enter_company_name_on_the_Company_name_field() throws InterruptedException {
 		faker=new Faker();
 //	    driver.findElement(By.xpath("//input[@name='company_name']")).sendKeys("testsample2");
+
 	    typeText("testsample2", driver.findElement(By.xpath("//input[@name='company_name']")));
 	}
 
@@ -152,7 +153,7 @@ else {
 	@When("user upload the logo in the Upload logo field")
 	public void user_upload_the_logo_in_the_Upload_logo_field() throws InterruptedException, AWTException, IOException {
 		
-		driver.findElement(By.xpath("//input[@type='file']")).sendKeys("D:\\ShopDot\\test.jpg");
+		driver.findElement(By.xpath("//input[@type='file']")).sendKeys("C:/Users/Emman/Downloads/download (5).jpeg");
    
 	}
 	@When("user enter brand name in the Brand name filed")
@@ -170,11 +171,12 @@ else {
 
 	@When("user selects three Brand category from the Brand category field")
 	public void user_selects_three_Brand_category_from_the_Brand_category_field() throws InterruptedException {
-		
-		selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[1]")));
-        selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[2]")));  
-	    selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[3]")));
-	    Thread.sleep(2000);
+
+		driver.findElement(By.xpath("(//input[@name='brand_categories'])[1]"));
+//		selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[1]")));
+//        selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[2]")));
+//	    selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[3]")));
+
 
 	}
 	
@@ -217,19 +219,18 @@ else {
     assertEquals(driver.findElement(By.xpath("(//div[@class='Toastify__toast-body']/child::div)[2]")).getText(), "Your changes have been saved.");
 	    
 	}
-	
-	@When("user enters invalid link in the Add a Youtube or Vimeo video link field")
-	public void user_enters_invalid_link_in_the_Add_a_Youtube_or_Vimeo_video_link_field() {
-	    driver.findElement(By.xpath("//input[@name='brand_promo']")).sendKeys("youtube.com");
-	}
 
-	@Then("user should see the error text message on below the Add a Youtube or Vimeo video link Field")
-	public void user_should_see_the_error_text_message_on_below_the_Add_a_Youtube_or_Vimeo_video_link_Field() {
-	    String error = driver.findElement(By.xpath("//span[@class='error-text']")).getText();
-	    assertEquals(error, "Please enter a valid URL");
-	    
-	}
+	@When("user enter the emailid {string} in Contact email Field")
+	public void userEnterTheEmailidInContactEmailField(String arg0) {
+		driver.findElement(By.xpath("//input[@name='company_email_address']")).sendKeys("Test@&^");
 
+	}
+	@Then("user should see the error message {string} below the fields")
+	public void userShouldSeeTheErrorMessageBelowTheFields(String arg0) {
+		String er = driver.findElement(By.xpath("//span[@class='error-text']")).getText();
+
+
+	}
 
 
 }

@@ -2,8 +2,8 @@
 Feature: Validating Preference menu functionality
   
   Background:
- #Given user launch the browser and Maximize window
- #When to hit the Shopdot Url
+ Given user launch the browser and Maximize window
+ When to hit the Shopdot Url
  And user Login to the shopdot application
  #And user navigated to the onboarding
  And user clicks on Preferences menu from Settings
@@ -40,7 +40,9 @@ Feature: Validating Preference menu functionality
     And user click in the Save button on preferences page
     And User is automatically moved to the next page, which is Integrations
     Then user should see the Sucessful message in the page
-    
+
+  @PF_002
+  Scenario:
     
 
     

@@ -78,15 +78,17 @@ public class GettingPaid extends BaseClase{
 	}
 
 	@When("user selects the option {string} from the Is your business a publicly traded C_Corporation or non-profit?")
-	public void user_selects_the_option_from_the_Is_your_business_a_publicly_traded_C_Corporation_or_non_profit(String string) {
+	public void user_selects_the_option_from_the_Is_your_business_a_publicly_traded_C_Corporation_or_non_profit(String string) throws InterruptedException {
 		System.out.println("//input[@value='"+string+"']");
-		driver.findElement(By.xpath("//input[@value='"+string.toLowerCase()+"']")).click();
+		Thread.sleep(2000);
+		waituntilClickable(driver.findElement(By.xpath("//input[@value='"+string.toLowerCase()+"']")));
 
 
 	}
 
 	@When("user selects the option {string} from the Are you an authorized signer?")
-	public void user_selects_the_option_from_the_Are_you_an_authorized_signer(String string) {
+	public void user_selects_the_option_from_the_Are_you_an_authorized_signer(String string) throws InterruptedException {
+		Thread.sleep(2000);
 		driver.findElements(By.xpath("//span[text()='"+string+"']")).get(1).click();
 
 	}

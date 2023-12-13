@@ -5,6 +5,8 @@ import static org.testng.Assert.assertEquals;
 import java.io.IOException;
 
 import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -14,11 +16,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
+import org.setpdefinition.GettingPaid;
 
 public class Integrations extends BaseClase{
 	public PropertiesReader propertiyReader =null ;
-	
-	@Given("User launch the browser and Maximize the window")
+	public  static Logger log;
+	public Integrations(){
+		log= LogManager.getLogger(Integrations.class);
+	}
+	@Given("user launch the browser and Maximize the window")
 	public void User_launch_the_browser_and_Maximize_the_window() throws Exception {
 	    driver= launchBrowser("Chrome");
 	    propertiyReader=new PropertiesReader();
@@ -32,7 +38,7 @@ public class Integrations extends BaseClase{
 
 	@When("user Login to the Shopdot application")
 	public void user_Login_to_the_Shopdot_application() {
-		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys("joshva13@yopmail.com");
+		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("INTEGRATION_USER"));
 		   driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 		   driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
 		   
@@ -107,10 +113,12 @@ public class Integrations extends BaseClase{
 		driver.findElement(By.xpath("//input[@id='account_email']")).sendKeys(propertiyReader.getProperty("shopifyuser"));
 Thread.sleep(2000);
 		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']")));
+		Thread.sleep(2500);
 	    driver.findElement(By.xpath("//input[@id='account_password']")).sendKeys(propertiyReader.getProperty("shopifypass"));
 	    Thread.sleep(2000);
-		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']"))).click();
-	    driver.findElement(By.xpath("//div[@class='Polaris-Box_375yx Polaris-Box--printHidden_15ag0']//span[@class='Polaris-Button__Text_yj3uv'][normalize-space()='Add unlisted sales channel']")).click();
+		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']")));
+
+		waituntilClickable(driver.findElements(By.xpath("//span[text()='Add unlisted sales channel']")).get(1));
 	       
 	    
 	    
@@ -132,11 +140,14 @@ Thread.sleep(2000);
 	
 	@When("navigate to the shopdot Integrations screen with the status Connected")
 	public void navigate_to_the_shopdot_Integrations_screen_with_the_status_Connected() throws InterruptedException {
-		
-	    String connected = driver.findElement(By.xpath("//span[@class='status-pill pill_connected']")).getText();
-	    assertEquals(connected, "Connected");
-	    System.out.println("The status is: " + connected);
-	    
+		WebElement connected = waitforElementVisiblity(driver.findElement(By.xpath("//span[@class='status-pill pill_connected']")));
+
+		assertEquals(connected.getText(), "Connected");
+	    assertEquals(connected.getCssValue("color"), "#2f80ed");
+	      log.info("The status is: " + connected.getText());
+		  log.info("The Color : " + connected.getCssValue("color"));
+
+
 	    
 		try {
 

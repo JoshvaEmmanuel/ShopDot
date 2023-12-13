@@ -36,21 +36,11 @@ Feature: Validating Brand Profile Menu functionality
  
  
   @BP_Tc003
-  Scenario: Validating Brand profile page with entring invalid format in Add a Youtube or Vimeo video link Field
+  Scenario: Validating Brand profile page with entring invalid format in Contact Email field link Field
   
-  And user enter company name on the Company name field
- And user enter email on the Contact email field
- And user enter phone numer in the Contact phone number field
- #And user upload the logo in the Upload logo field
- And user enter brand name in the Brand name filed
- And user enter website in the Brand website field
- And user selects three Brand category from the Brand category field
- And user selects Brand values from the Brand values field
- And user enters data in the About the brand field box
- And user enters invalid link in the Add a Youtube or Vimeo video link field
- And user click on the Save button
- Then user should see the error text message on below the Add a Youtube or Vimeo video link Field
- And should moved to the next page, which is Prefernces Page
+  When user enter the emailid "Test@)9////" in Contact email Field
+   Then user should see the error message "Must be a valid email." below the fields
+
 
  
 

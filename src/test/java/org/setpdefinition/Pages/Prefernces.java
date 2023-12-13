@@ -5,7 +5,11 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import Utils.PropertiesReader;
+import com.github.javafaker.Faker;
 import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -13,9 +17,17 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
+import org.setpdefinition.GettingPaid;
 
 public class Prefernces extends BaseClase{
-	
+	public PropertiesReader propertiyReader =null ;
+	public Faker faker;
+	public  static Logger log;
+	public Prefernces(){
+		log= LogManager.getLogger(Prefernces.class);
+		propertiyReader=new PropertiesReader();
+		faker=new Faker();
+	}
 	@Given("user launch the browser and Maximize window")
 	public void user_launch_the_browser_and_Maximize_window() throws Exception {
 		driver= launchBrowser("chrome");
@@ -30,7 +42,7 @@ public class Prefernces extends BaseClase{
 
 	@When("user Login to the shopdot application")
 	public void user_Login_to_the_shopdot_application() {
-	   driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys("testsample1@yopmail.com");
+	   driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("PREFERENCE_User"));
 	   driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 	   driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
 	}
