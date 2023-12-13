@@ -30,22 +30,22 @@ Feature: Validating Brand Profile Menu functionality
   And user enter invalid Brand Website
   Then user should see the error message "Please enter correct website url!"
  
-# @BP_Tc004
-# Scenario: Update Brand Profile Page
-#
-# And user enter company name on the Company name field
-# And user enter email on the Contact email field
-# And user enter phone numer in the Contact phone number field
-# And user upload the logo in the Upload logo field
-# And user enter brand name in the Brand name filed
-# And user enter website in the Brand website field
-# And user selects three Brand category from the Brand category field
-# And user selects Brand values from the Brand values field
-# And user enters data in the About the brand field box
-# And user enters link in the Add a Youtube or Vimeo video link field
-# And user click on the Save button
-# And User is automatically moved to the next page, which is Prefernces Page
-# Then user should see the Sucessful message
+ @BP_Tc004
+ Scenario: Update Brand Profile Page
+
+ And user enter company name on the Company name field
+ And user enter email on the Contact email field
+ And user enter phone numer in the Contact phone number field
+ And user upload the logo in the Upload logo field
+ And user enter brand name in the Brand name filed
+ And user enter website in the Brand website field
+ And user selects three Brand category from the Brand category field
+ And user selects Brand values from the Brand values field
+ And user enters data in the About the brand field box
+ And user enters link in the Add a Youtube or Vimeo video link field
+ And user click on the Save button
+ And User is automatically moved to the next page, which is Prefernces Page
+ Then user should see the Sucessful message
  
  
 

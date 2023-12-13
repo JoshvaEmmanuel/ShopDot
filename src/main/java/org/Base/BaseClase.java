@@ -373,5 +373,9 @@ public class BaseClase {
 		return random.nextInt(max - min + 1) + min;
 	}
 
+	public String getAbsolutePath(String relativePath){
+			return new File(relativePath).getAbsolutePath();
+	}
+
   }
 
