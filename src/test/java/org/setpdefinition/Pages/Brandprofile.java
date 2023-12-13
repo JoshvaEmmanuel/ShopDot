@@ -9,7 +9,10 @@ import java.io.IOException;
 
 import javax.swing.Action;
 
+import Utils.PropertiesReader;
 import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,40 +29,36 @@ public class Brandprofile extends BaseClase{
 	public Faker faker;
 	public Robot r;
 	pojoSignInpage j;
-	
-//	@Given("User Launch the browser and Maximize window")
-//	public void user_Launch_the_browser_and_Maximize_window() throws Exception {
-//	   r= new Robot();
-//	   launchBrowser("chrome");
-//	    windowMax();
-//	}
+	public static Logger logger;
+	public PropertiesReader propertiesReader;
+
+	public Brandprofile(){
+		faker=new Faker();
+		j =new pojoSignInpage(driver);
+		propertiesReader = new PropertiesReader();
+		logger= LogManager.getLogger(Brandprofile.class);
+
+	}
 
 	@When("to hit the Shopdot Url")
 	public void to_hit_the_Shopdot_Url() throws InterruptedException {
 	    launchurl("https://qa2.shopdotapp.com/login");
-	   
 	}
 
 	@When("user Login to the shopdot")
 	public void user_Login_to_the_shopdot() throws InterruptedException {
-		
-		pojoSignInpage j =new pojoSignInpage(driver);
-		sendText(j.getEmail(), "testsample10@yopmail.com");
-		sendText(j.getPassword(), "Welcome6@123");
-		clickBtn(j.getLogin());
-		
-		Thread.sleep(6000);
-		Actions a = new Actions(driver);
-		System.out.println("get the url is: " + driver.getCurrentUrl());
-if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/dashboard")) {
-	System.out.println("first");
-	a.moveToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]"))).build().perform();
-	System.out.println("second");
-	driver.findElement(By.xpath("//a[normalize-space()='Settings']")).click();
-} 
-else {
-	driver.findElement(By.xpath("")).click();
-}
+		logInShopDot(propertiesReader.getProperty("Brand_signemail"),propertiesReader.getProperty("Brand_password"));
+		try {
+			if (driver.findElements(By.xpath("(//span[@class='icon'])[2]")).size()!=0){
+				a.moveToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]"))).build().perform();
+				waituntilClickable(driver.findElement(By.xpath("//a[normalize-space()='Settings']")));
+			}
+		}
+		catch (Exception e){
+			logger.error(e);
+		}
+
+
 	}
 
 //	@When("user navigated to the onboarding")
@@ -89,9 +88,8 @@ else {
 //		JavascriptExecutor j = (JavascriptExecutor)driver;
 //		j.executeScript("window.scroll(0,1000)");
 		
-		WebElement scroll = driver.findElement(By.xpath("//button[normalize-space()='Save']"));
-		scroll.click();
-		
+		waituntilClickable(driver.findElement(By.xpath("//button[normalize-space()='Save']")));
+
 	}
 
 
@@ -143,6 +141,21 @@ else {
 	   typeText("testsample2@yopmail.com", driver.findElement(By.xpath("//input[@name='company_email_address']")));
 	}
 
+	@When("user enter invalid email on the Contact email field")
+	public void userenterinvalidemailontheContactemailfield() throws InterruptedException {
+		typeText(faker.internet().emailAddress()+generateRandomcharacter(), driver.findElement(By.xpath("//input[@name='company_email_address']")));
+	}
+
+	@When("user should see the error message {string}")
+	public void usershouldseetheerrormessage(String text) throws InterruptedException {
+//	   driver.findElement(By.xpath("//input[@name='company_email_address']")).sendKeys("testsample2@yopmail.com");
+		waitforElementVisiblity(driver.findElement(By.xpath("//span[@class='error-text']")));
+		assertEquals(driver.findElement(By.xpath("//span[@class='error-text']")).getText(),text);
+
+	}
+
+
+
 	@When("user enter phone numer in the Contact phone number field")
 	public void user_enter_phone_numer_in_the_Contact_phone_number_field() throws InterruptedException {
 //	    driver.findElement(By.xpath("//input[@placeholder='123-456-6587']")).sendKeys("1231231230");
@@ -152,7 +165,7 @@ else {
 	@When("user upload the logo in the Upload logo field")
 	public void user_upload_the_logo_in_the_Upload_logo_field() throws InterruptedException, AWTException, IOException {
 		
-		driver.findElement(By.xpath("//input[@type='file']")).sendKeys("D:\\ShopDot\\test.jpg");
+		driver.findElement(By.xpath("//input[@type='file']")).sendKeys("/test.jpg");
    
 	}
 	@When("user enter brand name in the Brand name filed")
@@ -162,15 +175,19 @@ else {
 	    typeText("Test001", driver.findElement(By.xpath("//input[@name='store_name']")));
 	}
 
+	@When("user enter invalid Brand Website")
+	public void userenterinvalidBrandWebsite() throws InterruptedException {
+		typeText("test.com"+generateRandomNumber(1,55), driver.findElement(By.xpath("//input[@placeholder='janebeautyparlor.com']")));
+	}
+
+
 	@When("user enter website in the Brand website field")
 	public void user_enter_website_in_the_Brand_website_field() {
-//	    driver.findElement(By.xpath("//input[@placeholder='janebeautyparlor.com']")).sendKeys("test.com");
 	    typeText("test.com", driver.findElement(By.xpath("//input[@placeholder='janebeautyparlor.com']")));
 	}
 
 	@When("user selects three Brand category from the Brand category field")
 	public void user_selects_three_Brand_category_from_the_Brand_category_field() throws InterruptedException {
-		
 		selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[1]")));
         selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[2]")));  
 	    selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[3]")));
