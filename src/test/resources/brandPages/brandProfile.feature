@@ -10,7 +10,7 @@ Feature: Validating Brand Profile Menu functionality
  #And user clicks on Brand Profile menu from Settings
  And Display brand profile page
 
- 
+
  @BP_Tc001
  Scenario: To validate Brand Profile Page without entering Data
  

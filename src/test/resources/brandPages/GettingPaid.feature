@@ -6,8 +6,8 @@ Feature: Validating gettingPaid menu functionality
  And user Login to the ShopDot
  And user clicks on gettingpaid menu 
  And Display Gettingpaid menu page
- And user selects the option No from the Is your business a publicly traded C_Corporation or non-profit?
- And user selects the option Yes from the Are you an authorized signer?
+ And user selects the option "no" from the Is your business a publicly traded C_Corporation or non-profit?
+ And user selects the option "Yes" from the Are you an authorized signer?
  And user click on the Start Application button
  
  @GP001

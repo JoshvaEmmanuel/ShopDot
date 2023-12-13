@@ -1,6 +1,6 @@
-	Feature: Validating the Onboarding
-	
-	
+
+@onboarding
+Feature: Validating the Onboarding
 #	Scenario: Login with Valid Credential 
 #	  Given User has to launch the browser and maximise the window
     #When To launch the Shopdot URL
@@ -13,11 +13,13 @@
     #Then User should navigate to the Verify Your Email page
     #But user should not be in Signup Page
     
-	 Scenario: Login with Valid Credential
-	  Given User launch the browser and Maximize window
+
+	Scenario: Login with Valid Credential
+
+		 Given user Launch the "firefox" Browser and Maximize the window
     When To launch the Shopdot URL
-	  And User enter the valid EmailId "<>" in the emailid field
-    And User enter the Valid Password "<Welcome6@123>" in the Password field
+	  And User enter the valid EmailId in the emailid field
+    And User enter the Valid Password in the Password field
     And User clicks on the SignIn button
     
 	 Scenario: Update Brand Profile Page
@@ -63,21 +65,21 @@
 #	 
 	 Scenario: Validating Getting Paid Business category as Single member LLC
 	 And Display Gettingpaid menu page
-   And user selects the option No from the Is your business a publicly traded C_Corporation or non-profit?
-   And user selects the option Yes from the Are you an authorized signer?
+		 And user selects the option "no" from the Is your business a publicly traded C_Corporation or non-profit?
+		 And user selects the option "Yes" from the Are you an authorized signer?
    And user click on the Start Application button
 	 And user enter data on the Legal name of business field
 	 And user enter data on the Doing business as field
 	 And user select option in the Business category field
 	 And user enter address in the Business website address field
-	 And user select Tax ID Type from Tax ID Type field
+		 And user select Tax ID "SINGLE_MEMBER_LLC" Type from Tax ID Type field
 	 And user enter data in the EIN field
 	 And user enter email in the Business email address field
 	 And user enter phone number in the Business phone number field
 	 And user enter address in the Address line1 field
 	 And user enetr address in the Address line2 field
 	 And user select country from Country field
-	 And user select sate from the select State field
+		 And user select "Alabama" sate from the select State field
 	 And user enter city name in the City Field
 	 And user enter zipcode in the ZIP field
 	 And user select state from the State of incorporation field
@@ -113,7 +115,7 @@
 	 And user click on the submit button
 #	 Then pop-up will display and user click on the Close button
 	 #And user should see the account satus as pending
-	   
+
 	  Scenario: Validating the Plans Functionality by choosing Growth Plan for the new user
 	  
 	  And user click on the Select Plan button on the Growth a confirmation window appears with a field to enter credit card information   
