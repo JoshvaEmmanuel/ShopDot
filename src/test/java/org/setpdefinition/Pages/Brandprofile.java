@@ -27,12 +27,12 @@ public class Brandprofile extends BaseClase{
 	public Robot r;
 	pojoSignInpage j;
 	
-	@Given("user Launch the browser and Maximize window")
-	public void user_Launch_the_browser_and_Maximize_window() throws Exception {
-	   r= new Robot();
-	   launchBrowser("chrome");
-	    windowMax();
-	}
+//	@Given("User Launch the browser and Maximize window")
+//	public void user_Launch_the_browser_and_Maximize_window() throws Exception {
+//	   r= new Robot();
+//	   launchBrowser("chrome");
+//	    windowMax();
+//	}
 
 	@When("to hit the Shopdot Url")
 	public void to_hit_the_Shopdot_Url() throws InterruptedException {

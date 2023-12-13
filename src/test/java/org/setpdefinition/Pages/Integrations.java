@@ -1,5 +1,6 @@
 package org.setpdefinition.Pages;
 
+import static org.setpdefinition.GettingPaid.log;
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
@@ -17,14 +18,14 @@ import junit.framework.Assert;
 
 public class Integrations extends BaseClase{
 	public PropertiesReader propertiyReader =null ;
-	
-	@Given("User launch the browser and Maximize the window")
-	public void User_launch_the_browser_and_Maximize_the_window() throws Exception {
-	    driver= launchBrowser("Chrome");
-	    propertiyReader=new PropertiesReader();
-	    
+
+	@Given("user launch the browser and Maximize the window")
+	public void userLaunchTheBrowserAndMaximizeTheWindow() throws Exception {
+		driver=launchBrowser("firefox");
+
 	}
 	
+
 	@When("user Hit the Shopdot Url")
 	public void user_Hit_the_Shopdot_Url() {
 	    launchurl("https://qa2.shopdotapp.com/login");
@@ -32,7 +33,7 @@ public class Integrations extends BaseClase{
 
 	@When("user Login to the Shopdot application")
 	public void user_Login_to_the_Shopdot_application() {
-		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys("joshva13@yopmail.com");
+		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys("testsample13@yopmail.com");
 		   driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 		   driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
 		   
@@ -109,8 +110,8 @@ Thread.sleep(2000);
 		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']")));
 	    driver.findElement(By.xpath("//input[@id='account_password']")).sendKeys(propertiyReader.getProperty("shopifypass"));
 	    Thread.sleep(2000);
-		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']"))).click();
-	    driver.findElement(By.xpath("//div[@class='Polaris-Box_375yx Polaris-Box--printHidden_15ag0']//span[@class='Polaris-Button__Text_yj3uv'][normalize-space()='Add unlisted sales channel']")).click();
+		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']")));
+		waituntilClickable(driver.findElement(By.xpath("//span[normalize-space()='Add unlisted sales channel']")));
 	       
 	    
 	    

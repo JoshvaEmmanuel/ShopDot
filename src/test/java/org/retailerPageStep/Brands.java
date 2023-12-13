@@ -12,10 +12,10 @@ import junit.framework.Assert;
 
 public class Brands extends BaseClase{
 	
-	@Given("user launch the browser and Maximize window")
-	public void user_launch_the_browser_and_Maximize_window() throws Exception {
-		driver=  launchBrowser("chrome");
-	}
+//	@Given("user launch the browser and Maximize window")
+//	public void user_launch_the_browser_and_Maximize_window() throws Exception {
+//		driver=  launchBrowser("chrome");
+//	}
 
 	@When("to hit the Shopdot Url")
 	public void to_hit_the_Shopdot_Url() {

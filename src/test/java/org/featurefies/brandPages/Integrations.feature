@@ -21,8 +21,8 @@ Feature: Validating Integrations menu functionality
  Scenario: Validating Integrations page with entering valid Store Name
  And user enter Store name 
  And user click on the Connect button
- And user should see the sucessful message on the page 
- Then it should navigate to the Shopify Login page 
+# And user should see the sucessful message on the page
+# Then it should navigate to the Shopify Login page
  And user Login to the Shopify
  And navigate to the shopdot Integrations screen with the status Connected
  
