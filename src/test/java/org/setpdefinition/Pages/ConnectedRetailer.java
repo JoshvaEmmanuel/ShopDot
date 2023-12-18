@@ -58,12 +58,10 @@ public class ConnectedRetailer extends BaseClase {
 
     @And("the Application displays only those approved retailers that match the search keyword")
     public void theApplicationDisplaysOnlyThoseApprovedRetailersThatMatchTheSearchKeyword() throws InterruptedException {
-
         afterSearchRetailerList = driver.findElements(By.xpath("//div[@class='store']"));
         String retailerName = afterSearchRetailerList.get(generateRandomNumber(0, afterSearchRetailerList.size()-1)).getText();
-        Thread.sleep(2000);
         log.info("The Retailer displayed the char that match the search word : " + retailerName);
-        Assert.assertTrue(retailerName.contains(typechare));
+        Assert.assertTrue(retailerName.toLowerCase().contains(typechare.toLowerCase()));
 
     }
 
