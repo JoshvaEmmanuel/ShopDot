@@ -15,8 +15,7 @@ Feature: Validating the Onboarding
     
 
 	Scenario: Login with Valid Credential
-
-		 Given user Launch the "chrome" Browser and Maximize the window
+		Given user launch the browser and Maximize window
     When To launch the Shopdot URL
 	  And User enter the valid EmailId in the emailid field
     And User enter the Valid Password in the Password field

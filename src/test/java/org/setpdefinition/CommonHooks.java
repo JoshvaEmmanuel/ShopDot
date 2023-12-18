@@ -19,6 +19,6 @@ public class CommonHooks  extends BaseClase {
     // Cleanup method - runs after each scenario
     @After
     public void tearDown() {
-   driver.close();
+//   driver.close();
     }
 }

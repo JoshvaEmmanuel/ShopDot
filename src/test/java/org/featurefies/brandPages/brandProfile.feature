@@ -4,7 +4,7 @@ Feature: Validating Brand Profile Menu functionality
  User should be able to configure the brand profile so that the retailer will be able to see the user Brand information
 
  Background:
- Given user Launch the "optionl" Browser and Maximize the window
+ Given user launch the browser and Maximize window
  When to hit the Shopdot Url
  And user Login to the shopdot
  #And user navigated to the onboarding

@@ -163,7 +163,7 @@ public class Brandprofile extends BaseClase{
 	@When("user upload the logo in the Upload logo field")
 	public void user_upload_the_logo_in_the_Upload_logo_field() throws InterruptedException, AWTException, IOException {
 		
-		driver.findElement(By.xpath("//input[@type='file']")).sendKeys(getAbsolutePath("src/test/resources/test.jpg"));
+		driver.findElement(By.xpath("//input[@type='file']")).sendKeys(getAbsolutePath("src/main/resources/test.jpg"));
    
 	}
 	@When("user enter brand name in the Brand name filed")
