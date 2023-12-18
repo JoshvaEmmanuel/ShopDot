@@ -32,17 +32,12 @@ public class GettingPaid extends BaseClase{
 		faker=new Faker();
 	}
 
-	@Given("user Launch the {string} Browser and Maximize the window")
-	public void userLaunchTheBrowserAndMaximizeTheWindow(String browserName) throws Exception {
-		driver=launchBrowser(browserName);
+	@Given("user Launch the Browser and Maximize the window")
+	public void userLaunchTheBrowserAndMaximizeTheWindow() throws Exception {
+		launchBrowser(propertiyReader.getProperty("browser"));
 		log.info("Browser successfully launched");
 	}
-//
-//	@Given("user Launch the Browser and Maximize the window")
-//	public void user_Launch_the_Browser_and_Maximize_the_window() throws Exception {
-//
-//	}
-//
+
 	@When("user launch the Shopdot URL")
 	public void user_launch_the_Shopdot_URL() throws AWTException {
 		launchurl("https://qa2.shopdotapp.com/login");
@@ -129,19 +124,20 @@ public class GettingPaid extends BaseClase{
 	}
 	@When("user select Tax ID {string} Type from Tax ID Type field")
 	public void userSelectTaxIDTypeFromTaxIDTypeField(String idType) {
-		driver.findElement(By.cssSelector("[value='"+idType+"']"
-		));
+		waituntilClickable(driver.findElement(By.xpath("//div[text()='Select Text ID']/parent::div/following-sibling::div/child::div")));
+		waituntilClickable(driver.findElement(By.xpath("//div[text()='"+idType+"']"
+		)));
 	}
 
 	@When("user enter data in the EIN field")
 	public void user_enter_data_in_the_EIN_field() throws InterruptedException {
-		
 	    driver.findElement(By.cssSelector("[name='employerIdentificationNumber']")).sendKeys(propertiyReader.getProperty("ENI"));
 	}
 
 	@When("user enter email in the Business email address field")
 	public void user_enter_email_in_the_Business_email_address_field() {
-		 driver.findElement(By.xpath("//input[@name='businessEmail']")).sendKeys("Njpixstist@ymail.com");
+		 driver.findElement(By.xpath("//input[@name='businessEmail']")).sendKeys(faker.internet().emailAddress()
+		 );
 	}
 
 	@When("user enter phone number in the Business phone number field")
@@ -445,32 +441,25 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 		
 	}
 
-	@Then("pop-up will display and user click on the Close button")
-	public void pop_up_will_display_and_user_click_on_the_Close_button() throws InterruptedException, IOException {
-		
-//		driver.findElement(By.className("popup-close button cancel")).click();
-		
-		try {	
-		if (driver.findElements(By.xpath("//div[@role='alert']")).size()!=0) {
-			screenShot("pop");
-			assertFalse(true);		}
-		
-		else {
-			assertTrue(true);
-		}
+
+	@Then("User should see pop-up and click on the Close button")
+	public void UsershouldseepopupandclickontheClosebutton(){
+		try {
+			if (driver.findElements(By.xpath("//div[@role='alert']")).size()!=0) {
+				assertFalse(true);		}
+
+
 		} catch (Exception e) {
 			System.err.println(e);
 		}
-//		waitforElementVisiblity(driver.findElement(By.className("popup-close button cancel"))).click();
+
 	}
 
-   
-//	002
 
 
 	@When("user enter data in the SSN field")
 	public void user_enter_data_in_the_SSN_field() {
-	    driver.findElements(By.xpath("//input[@type='tel']")).get(0).sendKeys(propertiyReader.getProperty("SSN_VALUE"));
+	    driver.findElements(By.xpath("//input[@type='tel']")).get(0).sendKeys(propertiyReader.getProperty("SSN"));
 
 	}
 

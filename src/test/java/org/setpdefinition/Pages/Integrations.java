@@ -111,11 +111,8 @@ Thread.sleep(2000);
 	    driver.findElement(By.xpath("//input[@id='account_password']")).sendKeys(propertiyReader.getProperty("shopifypass"));
 	    Thread.sleep(2000);
 		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']")));
-		waituntilClickable(driver.findElement(By.xpath("//span[normalize-space()='Add unlisted sales channel']")));
-	       
-	    
-	    
-	    
+		Thread.sleep(10000);
+		waituntilClickable(driver.findElement(By.xpath("//span[text()='Add unlisted sales channel']")));
 		try {
 
 			WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Getting Paid']"));

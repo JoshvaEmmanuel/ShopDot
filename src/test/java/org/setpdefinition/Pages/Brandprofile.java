@@ -147,7 +147,7 @@ public class Brandprofile extends BaseClase{
 	}
 
 	@When("user should see the error message {string}")
-	public void usershouldseetheerrormessage(String text) throws InterruptedException {
+	public void usershouldseethseerrormessage(String text) throws InterruptedException {
 //	   driver.findElement(By.xpath("//input[@name='company_email_address']")).sendKeys("testsample2@yopmail.com");
 		waitforElementVisiblity(driver.findElement(By.xpath("//span[@class='error-text']")));
 		assertEquals(driver.findElement(By.xpath("//span[@class='error-text']")).getText(),text);
@@ -164,9 +164,7 @@ public class Brandprofile extends BaseClase{
 	
 	@When("user upload the logo in the Upload logo field")
 	public void user_upload_the_logo_in_the_Upload_logo_field() throws InterruptedException, AWTException, IOException {
-		
 		driver.findElement(By.xpath("//input[@type='file']")).sendKeys(getAbsolutePath("src/test/resources/test.jpg"));
-   
 	}
 	@When("user enter brand name in the Brand name filed")
 	public void user_enter_brand_name_in_the_Brand_name_filed() throws InterruptedException {

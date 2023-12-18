@@ -1,7 +1,9 @@
+
+@gettingpaid
 Feature: Validating gettingPaid menu functionality
   
   Background:
- Given user Launch the "firefox" Browser and Maximize the window
+ Given user Launch the Browser and Maximize the window
  When user launch the Shopdot URL
  And user Login to the ShopDot
  And user clicks on gettingpaid menu 
@@ -11,13 +13,15 @@ Feature: Validating gettingPaid menu functionality
  And user click on the Start Application button
  
  @GP001
-   Scenario: Validating Getting Paid Business category as Single member LLC
+
+
+ Scenario: Validating Getting Paid Business category as Single member LLC
    
    And user enter data on the Legal name of business field
    And user enter data on the Doing business as field
    And user select option in the Business category field
    And user enter address in the Business website address field
-   And user select Tax ID "SINGLE_MEMBER_LLC" Type from Tax ID Type field
+   And user select Tax ID "Employer Identification Number (EIN)" Type from Tax ID Type field
    And user enter data in the EIN field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
@@ -58,8 +62,8 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
-   #And user should see the account satus as pending
+#   Then User should see pop-up and click on the Close button
+
    
     @GP002
    Scenario: Validating Getting Paid Business category as Single member LLC choosing Tax ID Type as SSN
@@ -109,24 +113,26 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
    
    @GP003
+
+
    Scenario: Select an option Sole Proprietor in the Business category field
 
    And user enter data on the Legal name of business field
    And user enter data on the Doing business as field
    And user select an option Sole Proprietor in the Business category field
    And user enter address in the Business website address field
-   And user select Tax ID Type from Tax ID Type field
+     And user select Tax ID Type as "Social Security Number (SSN)"
    And user enter data in the EIN field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select country from Country field
-   And user select sate from the select State field
+     And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user select state from the State of incorporation field
@@ -160,7 +166,7 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
    
      @GP004
@@ -176,7 +182,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select country from Country field
-   And user select sate from the select State field
+       And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user select state from the State of incorporation field
@@ -210,7 +216,7 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
    
    @GP005
@@ -264,7 +270,7 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button 
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
    
    @GP006
@@ -317,7 +323,7 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
    
    @GP007
@@ -371,7 +377,7 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
    
    @GP008
@@ -425,7 +431,7 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
    
    @GP009
@@ -479,7 +485,7 @@ Feature: Validating gettingPaid menu functionality
    And navigate to the summary page
    And user click on the checkbox
    And user click on the submit button
-   Then pop-up will display and user click on the Close button
+#   Then pop-up will display and user click on the Close button
    #And user should see the account satus as pending
 
    

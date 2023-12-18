@@ -18,7 +18,7 @@ public class Prefernces extends BaseClase{
 	
 	@Given("user launch the browser and Maximize window")
 	public void user_launch_the_browser_and_Maximize_window() throws Exception {
-		driver= launchBrowser("chrome");
+		launchBrowser("firefox");
 		
 	}
 
