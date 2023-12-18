@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
 
+import io.cucumber.java.en.And;
 import org.Base.BaseClase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +39,7 @@ public class Integrations extends BaseClase{
 
 	@When("user Login to the Shopdot application")
 	public void user_Login_to_the_Shopdot_application() {
-		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("INTEGRATION_USER"));
+		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("IntgirationLogin"));
 		   driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 		   driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
 		   
@@ -83,7 +84,7 @@ public class Integrations extends BaseClase{
 		propertiyReader=new PropertiesReader();
 		System.out.println("Entred store Name: ");
 		Thread.sleep(2000);
-		System.out.println(propertiyReader.getProperty("Intgirationuser"));
+		log.info(propertiyReader.getProperty("Intgirationuser"));
 	    driver.findElement(By.xpath("//input[@type='text']")).sendKeys(propertiyReader.getProperty("Intgirationuser"));
 
 	}
@@ -180,11 +181,11 @@ Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@type='text']")).sendKeys("testshopdot1.shopify.com");
 	}
 
-	@Then("user should see the error text message on below the Field")
-	public void user_should_see_the_error_text_message_on_below_the_Field() {
-	    String error = driver.findElement(By.xpath("")).getText();
-	    assertEquals(error, "");
-	    System.out.println(error);
+	@Then("user should see the error text {string} on below the Field")
+	public void user_should_see_the_error_text_message_on_below_the_Field(String errorText) {
+	    String error = driver.findElement(By.xpath("//div[@class='invalid-feedback']")).getText();
+	    assertEquals(error, errorText);
+	    log.info(error);
 	}
 //	004
 	@When("user click on the Disconnect from Shopify button")
@@ -283,4 +284,17 @@ Thread.sleep(2000);
 	    
 	}
 
+	@And("user enter Existing Store name")
+	public void userEnterExistingStoreName() throws InterruptedException {
+		propertiyReader=new PropertiesReader();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[@type='text']")).sendKeys(propertiyReader.getProperty("ExistingIntgirationuser"));
+	}
+
+	@Then("user should see the Error message {string} on the page")
+	public void userShouldSeeTheErrorMessageOnThePage(String errorpopup) {
+		String popup = driver.findElement(By.xpath("//div[@class='Toastify__toast-container Toastify__toast-container--top-right']")).getText();
+		assertEquals(popup, errorpopup);
+		log.info(popup);
+	}
 }

@@ -15,7 +15,7 @@ Feature: Validating Integrations menu functionality
  @IP002
  Scenario: Validating Integrations page with entering invalid Store Name 
  And user enter invalid store name in the field
- Then user should see the error text message on below the Field
+ Then user should see the error text "Please only enter the name of your store." on below the Field
  
  @IP003
  Scenario: Validating Integrations page with entering valid Store Name
@@ -40,5 +40,10 @@ Feature: Validating Integrations menu functionality
   Then sucessful message display on the Screen
   And user should able to see the Disconnect from Shopify button and display the Connected status
 
+  @IP006
+  Scenario: Validating with existing store name
+   And user enter Existing Store name
+   And user click on the Connect button
+   Then user should see the Error message "This shop already exists with another user. Please try with a different shop" on the page
   
 

@@ -26,8 +26,8 @@ Feature: Validating Preference menu functionality
   
     And wherein the Wholesale Pricing field shows default is value50% 
     And wherein the Inventory Buffer field shows default is value70%
-    And wherein the Retail Pricing field selects Enforce retail price selected by default
-    And wherein the Return and Refund Policy selected by default
+    And wherein the Retail Pricing field selects "Enforce retail price" by default
+    And wherein the Return and Refund Policy selected by default "Returns and refunds are accepted on a case-by-case basis"
     And user enter data on  the Requirements for retailers who want to connect with your brand field
     And user enter address in the Address1 field
     And user selects Country from the Country field

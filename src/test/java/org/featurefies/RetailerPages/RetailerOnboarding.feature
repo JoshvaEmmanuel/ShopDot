@@ -1,4 +1,5 @@
- Feature: Validating the Retailer Onboarding
+ @RetailerOnboarding
+Feature: Validating the Retailer Onboarding
  
     
     Scenario: Updating the Retailer Profile Page for new user

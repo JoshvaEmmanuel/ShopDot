@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -25,260 +26,285 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.pojo.pojoSignInpage;
 
 public class BaseClase {
-	public static WebDriver driver;
-	public  pojoSignInpage pojoSignInpage;
-	public Logger logger;
+    public static WebDriver driver;
+    public pojoSignInpage pojoSignInpage;
+    public Logger logger;
 
-	public JavascriptExecutor jsExecutor;
-
-
-	public BaseClase(){
-		pojoSignInpage =new pojoSignInpage(driver);
-		logger= LogManager.getLogger(BaseClase.class);
-		 jsExecutor = (JavascriptExecutor) driver;
-
-	}
-	public  WebDriver launchBrowser(String browserName) throws Exception {
+    public JavascriptExecutor jsExecutor;
 
 
-		try {
-			if (browserName.equalsIgnoreCase("chrome")) {
-				System.setProperty("webdriver.chrome.driver", "C:\\Users\\Emman\\Downloads\\chromedriver-win64 (2)\\chromedriver-win64\\chromedriver.exe");
-				driver = new ChromeDriver();
+    public BaseClase() {
+        pojoSignInpage = new pojoSignInpage(driver);
+        logger = LogManager.getLogger(BaseClase.class);
+        jsExecutor = (JavascriptExecutor) driver;
 
-			} else if (browserName.equalsIgnoreCase("firefox")) {
-				WebDriverManager.firefoxdriver().setup();
-				driver = new FirefoxDriver();
-				driver.manage().window().setSize(new Dimension(1920, 1080)); // Set your desired window size
+    }
 
-			}
-				else {
-				throw new Exception("Browser Name is invalid");
-			}
+    public WebDriver launchBrowser(String browserName) throws Exception {
 
-			driver.manage().window().maximize();
 
-			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			return driver;
+        try {
+            if (browserName.equalsIgnoreCase("chrome")) {
+                System.setProperty("webdriver.chrome.driver", "C:\\Users\\Emman\\Downloads\\chromedriver-win64 (2)\\chromedriver-win64\\chromedriver.exe");
+                driver = new ChromeDriver();
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return driver;
-		
-	}
-		public static void windowMax() {
-			driver.manage().window().maximize();
-			
+            } else if (browserName.equalsIgnoreCase("firefox")) {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                driver.manage().window().setSize(new Dimension(1920, 1080)); // Set your desired window size
 
-		}
+            } else {
+                throw new Exception("Browser Name is invalid");
+            }
 
-		
-		public static WebElement waitforElementVisiblity(WebElement element) {
-			try {
+            driver.manage().window().maximize();
+
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            return driver;
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return driver;
+
+    }
+
+    public static void windowMax() {
+        driver.manage().window().maximize();
+
+
+    }
+
+
+    public static WebElement waitforElementVisiblity(WebElement element) {
+        try {
 //				
-				WebDriverWait wb = new WebDriverWait(driver, 60);
-				wb.until(ExpectedConditions.visibilityOf(element));
-				return element;
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return element;
-		}
-		
-		public static WebElement
+            WebDriverWait wb = new WebDriverWait(driver, 60);
+            wb.until(ExpectedConditions.visibilityOf(element));
+            return element;
 
-		waituntilClickable(WebElement element) {
-			try {
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return element;
+    }
+
+    public static WebElement
+
+    waituntilClickable(WebElement element) {
+        try {
 //
 
-				WebDriverWait wb = new WebDriverWait(driver, 60);
-				wb.until(ExpectedConditions.elementToBeClickable(element)).click();;
-			
-				
-			} catch (Exception e) {
-				JavascriptExecutor executor = (JavascriptExecutor) driver;
-				executor.executeScript("arguments[0].click();", element);
-			}
-			return element;
-		}
+            WebDriverWait wb = new WebDriverWait(driver, 60);
+            wb.until(ExpectedConditions.elementToBeClickable(element)).click();
+            ;
 
-		public static void launchurl(String url) {
-		try {
-			driver.get(url);
-			
 
-		driver.manage().window().maximize();
-		driver.manage().deleteAllCookies();
-		} catch (Exception e) {
+        } catch (Exception e) {
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("arguments[0].click();", element);
+        }
+        return element;
+    }
 
-		e.printStackTrace();
-	}
+    public static void launchurl(String url) {
+        try {
+            driver.get(url);
 
- }
-		public static void selectMultiplecheckBox(WebElement element) {
-			try {
-				String attribute = element.getAttribute("checked");
-				System.out.println(attribute);
-				if (attribute .equalsIgnoreCase("true") ){
-					System.out.println("Element is already checked");
-				}
-				else {
-					element.click();
-				}
-			} catch (Exception e) {
-				System.out.println("Element needs to click");
-				element.click();
-				
-			}
-			
-		}
 
-		public static void pageTitle() {
-			String title = driver.getTitle();
-			System.out.println(title);
-		}
+            driver.manage().window().maximize();
+            driver.manage().deleteAllCookies();
+        } catch (Exception e) {
 
-		public static void pageUrl() {
-			String currentUrl = driver.getCurrentUrl();
-			System.out.println(currentUrl);
-		}
+            e.printStackTrace();
+        }
 
-		public static void sendText(WebElement webElement, String text) {
-			((WebElement) webElement).sendKeys(text);
-		}
+    }
 
-		public static void closeEntireBrowser() {
-			driver.quit();
-		}
+    public static void selectMultiplecheckBox(WebElement element) {
+        try {
+            String attribute = element.getAttribute("checked");
+            System.out.println(attribute);
+            if (attribute.equalsIgnoreCase("true")) {
+                System.out.println("Element is already checked");
+            } else {
+                element.click();
+            }
+        } catch (Exception e) {
+            System.out.println("Element needs to click");
+            element.click();
 
-		public static void clickBtn(WebElement we) {
-			we.click();
-		}
+        }
 
-		public static void closeWindow() {
-			driver.close();
-		}
+    }
+    public void retryClick(WebElement element) {
+        try {
+            element.click();
+        } catch (StaleElementReferenceException e) {
+            // Re-try the click operation
+            retryClick(element);
+        }
+    }
 
-		public static void navigateBack() {
-			driver.navigate().back();
-		}
+    public static void mouseHoverToElement(WebElement element) {
+        try {
+            waitforElementVisiblity(element);
+            Actions ac = new Actions(driver);
+            ac.moveToElement(element).build().perform();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-		public static void navigateforward() {
-			driver.navigate().forward();
-		}
 
-		public static void navigateTo(String url) {
-			driver.navigate().to(url);
-		}
+    public static void pageTitle() {
+        String title = driver.getTitle();
+        System.out.println(title);
+    }
 
-		public static void navigateRefresh() {
-			driver.navigate().refresh();
-		}
+    public static void pageUrl() {
+        String currentUrl = driver.getCurrentUrl();
+        System.out.println(currentUrl);
+    }
 
-		public static void alertAccept() {
-			driver.switchTo().alert().accept();
-		}
+    public static void sendText(WebElement webElement, String text) {
+        ((WebElement) webElement).sendKeys(text);
+    }
 
-		public static void alertDismiss() {
-			driver.switchTo().alert().dismiss();
-		}
+    public static void closeEntireBrowser() {
+        driver.quit();
+    }
 
-		public static void alertGetText() {
-			String gettext = driver.switchTo().alert().getText();
-			System.out.println(gettext);
-		}
+    public static void clickBtn(WebElement we) {
+        we.click();
+    }
 
-		public static void alertSentKeys(String values) {
-			driver.switchTo().alert().sendKeys(values);
-		}
+    public static void closeWindow() {
+        driver.close();
+    }
 
-		public static void isEnable(WebElement element) {
-			if (element.isEnabled()) {
-				System.out.println(element.isEnabled());
-			} else {
-				System.out.println("False");
-			}
-		}
+    public static void navigateBack() {
+        driver.navigate().back();
+    }
 
-		public static void isDisplayed(WebElement element) {
-			if (element.isDisplayed()) {
-				System.out.println(element.isDisplayed());
-			} else {
-				System.out.println("False");
-			}
-		}
+    public static void navigateforward() {
+        driver.navigate().forward();
+    }
 
-		public static void isSelected(WebElement element) {
-			if (element.isSelected()) {
-				System.out.println(element.isSelected());
-			} else {
-				System.out.println("False");
-			}
-		}
+    public static void navigateTo(String url) {
+        driver.navigate().to(url);
+    }
 
-		
-		public static void screenShot(String imgName) throws IOException {
-			try {
-			TakesScreenshot ts = (TakesScreenshot) driver;			
-			File src = ts.getScreenshotAs(OutputType.FILE);
-			File des = new File("./ScreenShot/img.png");
-			FileUtils.copyFile(src, des);
-		}catch (WebDriverException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void navigateRefresh() {
+        driver.navigate().refresh();
+    }
 
-		public static void dropDown(WebElement element, String type, String value) {
-			Select s = new Select(element);
-			if (type.equalsIgnoreCase("selectbyvalue")) {
-				s.selectByValue(value);
-			} else if (type.equalsIgnoreCase("selectbyindex")) {
-				int data = Integer.parseInt(value);
-				s.selectByIndex(data);
-			} else if (type.equalsIgnoreCase("selectbyvisibletext")) {
-				s.selectByVisibleText(value);
-			}
-		}
+    public static void alertAccept() {
+        driver.switchTo().alert().accept();
+    }
 
-		public static Actions a;
+    public static void alertDismiss() {
+        driver.switchTo().alert().dismiss();
+    }
 
-		public static void moveTheCursor(WebElement ele) {
-			a = new Actions(driver);
-			a.moveToElement(ele).perform();
-		}
+    public static void alertGetText() {
+        String gettext = driver.switchTo().alert().getText();
+        System.out.println(gettext);
+    }
 
-		public static void dragDrop(WebElement drag, WebElement drop) {
-			a = new Actions(driver);
-			a.dragAndDrop(drag, drop).perform();
-		}
+    public static void alertSentKeys(String values) {
+        driver.switchTo().alert().sendKeys(values);
+    }
 
-		public static JavascriptExecutor js;
+    public static void isEnable(WebElement element) {
+        if (element.isEnabled()) {
+            System.out.println(element.isEnabled());
+        } else {
+            System.out.println("False");
+        }
+    }
 
-		public static void scrollToTheElement(WebElement element) {
-			js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView(true)", element);
-		}
+    public static void isDisplayed(WebElement element) {
+        if (element.isDisplayed()) {
+            System.out.println(element.isDisplayed());
+        } else {
+            System.out.println("False");
+        }
+    }
 
-		public static void scroll(WebElement we) {
-			js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView(false)", we);
-		}
-	    public void Timewait() {
-			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+    public static void isSelected(WebElement element) {
+        if (element.isSelected()) {
+            System.out.println(element.isSelected());
+        } else {
+            System.out.println("False");
+        }
+    }
 
-		}
-	    public void typeText(String text, WebElement element)  {
-			logger.info("Entering Text:"+text);
-			waitforElementVisiblity(element);
-			logger.info("Clearing input field");
-			jsExecutor.executeScript("arguments[0].value='';", element);
 
-	    	element.sendKeys(text);
-		}
+    public static void screenShot(String imgName) throws IOException {
+        try {
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            File src = ts.getScreenshotAs(OutputType.FILE);
+            File des = new File("./ScreenShot/img.png");
+            FileUtils.copyFile(src, des);
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void dropDown(WebElement element, String type, String value) {
+        Select s = new Select(element);
+        if (type.equalsIgnoreCase("selectbyvalue")) {
+            s.selectByValue(value);
+        } else if (type.equalsIgnoreCase("selectbyindex")) {
+            int data = Integer.parseInt(value);
+            s.selectByIndex(data);
+        } else if (type.equalsIgnoreCase("selectbyvisibletext")) {
+            s.selectByVisibleText(value);
+        }
+    }
+
+    public static Actions a;
+
+    public static void moveTheCursor(WebElement ele) {
+        a = new Actions(driver);
+        a.moveToElement(ele).perform();
+    }
+
+    public static void dragDrop(WebElement drag, WebElement drop) {
+        a = new Actions(driver);
+        a.dragAndDrop(drag, drop).perform();
+    }
+
+    public static JavascriptExecutor js;
+
+    public static void scrollToTheElement(WebElement element) {
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true)", element);
+    }
+
+    public static void scroll(WebElement we) {
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(false)", we);
+    }
+
+    public void Timewait() {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+    }
+
+    public void typeText(String text, WebElement element) {
+        logger.info("Entering Text:" + text);
+        waitforElementVisiblity(element);
+        logger.info("Clearing input field");
+        element.clear();
+
+
+        element.sendKeys(text);
+    }
 
 //	}
 //		public static void excelRead(String sheetName, int rowNum, int cellNum) throws IOException {
@@ -336,46 +362,47 @@ public class BaseClase {
 //	        FileOutputStream fos = new FileOutputStream(f);
 //	        wb.write(fos);
 //	        }
-	//}
+    //}
 
-	public void logInShopDot(String username, String password){
-        logger.info("Entering Username as:"+username);
-		sendText(pojoSignInpage.getEmail(), username);
-		logger.info("Entering Username as:"+password);
-		sendText(pojoSignInpage.getPassword(), password);
-		logger.info("Clicking on Log in button");
-		clickBtn(pojoSignInpage.getLogin());
-	}
+    public void logInShopDot(String username, String password) {
+        logger.info("Entering Username as:" + username);
+        sendText(pojoSignInpage.getEmail(), username);
+        logger.info("Entering Username as:" + password);
+        sendText(pojoSignInpage.getPassword(), password);
+        logger.info("Clicking on Log in button");
+        clickBtn(pojoSignInpage.getLogin());
+    }
 
-	public static String generateRandomcharacter() {
-		// Specify the characters allowed in the email address
-		String allowedCharacters = "abcdefghijklmnopqrstuvwxyz0123456789_-,#$^&*.";
+    public static String generateRandomcharacter() {
+        // Specify the characters allowed in the email address
+        String allowedCharacters = "abcdefghijklmnopqrstuvwxyz0123456789_-,#$^&*.";
 
-		int emailLength = 2;
-		StringBuilder randomEmail = new StringBuilder();
+        int emailLength = 2;
+        StringBuilder randomEmail = new StringBuilder();
 
-		Random random = new Random();
-		for (int i = 0; i < emailLength; i++) {
-			int randomIndex = random.nextInt(allowedCharacters.length());
-			char randomChar = allowedCharacters.charAt(randomIndex);
-			randomEmail.append(randomChar);
-		}
-		randomEmail.append("$");
-		return randomEmail.toString();
-	}
+        Random random = new Random();
+        for (int i = 0; i < emailLength; i++) {
+            int randomIndex = random.nextInt(allowedCharacters.length());
+            char randomChar = allowedCharacters.charAt(randomIndex);
+            randomEmail.append(randomChar);
+        }
+        randomEmail.append("$");
+        return randomEmail.toString();
+    }
 
-// This method is used to give random integer
-	public static int generateRandomNumber(int min, int max) {
-		// Create a Random object
-		Random random = new Random();
+    // This method is used to give random integer
+    public static int generateRandomNumber(int min, int max) {
+        // Create a Random object
+        Random random = new Random();
 
-		// Generate a random number within the specified range [min, max]
-		return random.nextInt(max - min + 1) + min;
-	}
+        // Generate a random number within the specified range [min, max]
+        return random.nextInt(max - min + 1) + min;
+    }
 
-	public String getAbsolutePath(String relativePath){
-			return new File(relativePath).getAbsolutePath();
-	}
+    public String getAbsolutePath(String relativePath) {
+        return new File(relativePath).getAbsolutePath();
+    }
 
-  }
+
+}
 

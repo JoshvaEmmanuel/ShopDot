@@ -2,20 +2,33 @@ package org.retailerPageStep;
 
 import static org.testng.Assert.assertEquals;
 
+import Utils.PropertiesReader;
+import com.github.javafaker.Faker;
 import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
+import org.setpdefinition.Pages.ConnectedRetailer;
 
 public class Brands extends BaseClase{
+	public PropertiesReader propertiyReader =null ;
+	public Faker faker;
+	public  static Logger log;
+	public Brands(){
+		log= LogManager.getLogger(Brands.class);
+		propertiyReader=new PropertiesReader();
+		faker=new Faker();
+	}
 	
-//	@Given("user launch the browser and Maximize window")
-//	public void user_launch_the_browser_and_Maximize_window() throws Exception {
-//		driver=  launchBrowser("chrome");
-//	}
+	@Given("user launch the browser and Maximize window")
+	public void user_launch_the_browser_and_Maximize_window() throws Exception {
+		driver=  launchBrowser("chrome");
+	}
 
 	@When("to hit the Shopdot Url")
 	public void to_hit_the_Shopdot_Url() {
@@ -24,7 +37,7 @@ public class Brands extends BaseClase{
 
 	@When("user login to the Shopdot Application")
 	public void user_login_to_the_Shopdot_Application() {
-		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys("shopdottesting004@yopmail.com");
+		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("RetailerLogin"));
 		   driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 		   driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
 	}
@@ -46,8 +59,9 @@ public class Brands extends BaseClase{
 
 	@When("displays the sucessful message {string}")
 	public void displays_the_sucessful_message(String string) {
-	    String text = driver.findElement(By.xpath("//h2[normalize-space()='Connect Request Sent Successfully!']")).getText();
-	    assertEquals(text, "Connect Request Sent Successfully!");
+	    String sucessfultext = driver.findElement(By.xpath("//h2[normalize-space()='Connect Request Sent Successfully!']")).getText();
+	    assertEquals(sucessfultext, "Connect Request Sent Successfully!");
+		log.info(sucessfultext);
 
 	}
 
@@ -60,7 +74,7 @@ public class Brands extends BaseClase{
 	public void status_changes_to(String string) throws InterruptedException {
 	    Thread.sleep(4000);
 	    String status = driver.findElement(By.xpath("//tbody/tr[2]/td[4]/div[1]/span[1]")).getText();
-	    assertEquals(status, "Not Connected");
+	    assertEquals(status, "Pending");
 	    System.out.println("Now The Brand status is: " + status);
 	}
 	
@@ -109,7 +123,9 @@ public class Brands extends BaseClase{
 
 	@Then("the Application displays the result count as {int}")
 	public void the_Application_displays_the_result_count_as(Integer int1) {
-	    
+		String count = driver.findElement(By.xpath("")).getText();
+		log.info(count);
+
 	}
 
 }

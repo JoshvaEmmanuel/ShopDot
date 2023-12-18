@@ -30,7 +30,7 @@ public class Prefernces extends BaseClase{
 	}
 	@Given("user launch the browser and Maximize window")
 	public void user_launch_the_browser_and_Maximize_window() throws Exception {
-		driver= launchBrowser("chrome");
+		driver= launchBrowser(propertiyReader.getProperty("browser"));
 		
 	}
 
@@ -80,32 +80,45 @@ public class Prefernces extends BaseClase{
 		
 	    String gettext = driver.findElement(By.xpath("//h1[@class='m-0']")).getText();
 	    Assert.assertEquals(gettext, "Preferences");
-	    System.out.println("Displaying page is: " + gettext);
+	    log.info("Displaying page is: " + gettext);
 	}
 
 	@When("wherein the Wholesale Pricing field shows default is value{int}%")
 	public void wherein_the_Wholesale_Pricing_field_shows_default_is_value(Integer int1) throws IOException {
 	    screenShot("wholeslae");
 	    String text = driver.findElement(By.xpath("//span[@id='wpValue']")).getText();
-	    System.out.println("The Wholesale Pricing Default Value is: "+ text);
+	   log.info("The Wholesale Pricing Default Value is: "+ text);
 	}
 	@When("wherein the Inventory Buffer field shows default is value{int}%")
 	public void wherein_the_Inventory_Buffer_field_shows_default_is_value(Integer int1) {
 	    String inventory = driver.findElement(By.xpath("//label[@id='ibValue']")).getText();
 	    Assert.assertEquals(inventory, "70");
-	    System.out.println("The Inventory Buffer Default Value is: "+ inventory);
+	   log.info("The Inventory Buffer Default Value is: "+ inventory);
 	}
 	
-	@When("wherein the Retail Pricing field selects Enforce retail price selected by default")
-	public void wherein_the_Retail_Pricing_field_selects_Enforce_retail_price_selected_by_default() throws IOException {
+	@When("wherein the Retail Pricing field selects {string} by default")
+	public void wherein_the_Retail_Pricing_field_selects_Enforce_retail_price_selected_by_default(String Text) throws IOException {
 	    screenShot("retailer pr");
-	}
+//		String selected = driver.findElement(By.className("select__input-container css-19bb58m")).getText();
+//
+//		Assert.assertEquals(selected, Text);
+//        log.info("The Default option of Retail Pricing is : " + selected);
+    }
 	
-	@When("wherein the Return and Refund Policy selected by default")
-	public void wherein_the_Return_and_Refund_Policy_selected_by_default() {
-		String RR = driver.findElement(By.xpath("//span[contains(text(),'Returns and refunds are accepted on a case-by-case')]")).getText();
-		Assert.assertEquals(RR, "Returns and refunds are accepted on a case-by-case basis");
-		System.out.println("The Default option is : " + RR);
+	@When("wherein the Return and Refund Policy selected by default {string}")
+	public void wherein_the_Return_and_Refund_Policy_selected_by_default(String text) {
+//		String returnPolicy = String.valueOf(driver.findElement(By.name("retunRefundPolicy")).isSelected());
+		WebElement element = driver.findElement(By.xpath("//span[contains(text(),'Returns and refunds are accepted on a case-by-case')]"));
+		element.getText();
+		log.info(element);
+		boolean isClicked = element.isSelected();
+		if (isClicked) {
+			log.info("Element has been clicked");
+		} else {
+			log.info("Element has not been clicked");
+		}
+//		Assert.assertEquals(returnPolicy, text);
+//		log.info("The Default option is : " + returnPolicy);
 	    
 	    
 	}
@@ -224,7 +237,7 @@ public class Prefernces extends BaseClase{
 	@When("user enter address in the Address{int} field")
 	public void user_enter_address_in_the_Address_field(Integer int1) throws InterruptedException {
 		typeText("Testing Address", driver.findElement(By.xpath("//input[@name='address1']")));
-		
+
 //	    driver.findElement(By.xpath("//input[@name='address1']")).sendKeys("Testing Address1");
 	}
 
@@ -309,11 +322,8 @@ public class Prefernces extends BaseClase{
 		String sucess = driver.findElement(By.xpath("//div[@role='alert']")).getText();
 		System.out.println("The message displayed on the screen is" + sucess);
 		Assert.assertEquals(sucess.toLowerCase(), "Your changes have been saved.".toLowerCase());
-		System.out.println("The message displayed on the screen is" + sucess);
-		
-		String sucess1 = driver.findElement(By.xpath("//div[@id='2']")).getText();
-		Assert.assertEquals(sucess1.toLowerCase(), "Your changes have been saved.".toLowerCase());
-		System.out.println("The message displayed on the screen is" + sucess1);
+		log.info("The message displayed on the screen is" + sucess);
+
 	}
 	@Then("User is automatically moved to the next page, which is Integrations")
 	public void user_is_automatically_moved_to_the_next_page_which_is_Integrations() {

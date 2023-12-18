@@ -5,7 +5,10 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
+import Utils.PropertiesReader;
 import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -18,7 +21,14 @@ import io.cucumber.java.en.When;
 import junit.framework.Assert;
 
 public class retailerProfile extends BaseClase{
+	public PropertiesReader propertiyReader =null ;
 	public Faker faker;
+	public  static Logger log;
+	public retailerProfile(){
+		log= LogManager.getLogger(retailerProfile.class);
+		propertiyReader=new PropertiesReader();
+		faker=new Faker();
+	}
 	@Given("User Launch the Browser and Maximize the Window")
 	public void user_Launch_the_Browser_and_Maximize_the_Window() throws Exception {
 		driver=  launchBrowser("chrome");
@@ -32,7 +42,7 @@ public class retailerProfile extends BaseClase{
 
 	@When("User Login to the ShopDot Application")
 	public void user_Login_to_the_ShopDot_Application() {
-		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys("shopdottesting008@yopmail.com");
+		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("RetailerSignIn"));
 		   driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 		   driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
 
@@ -46,16 +56,16 @@ public class retailerProfile extends BaseClase{
 
 	@When("User Click on the Setting button")
 	public void user_Click_on_the_Setting_button() {
-		
-//  if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/dashboard")) {
-	  driver.findElement(By.xpath("//a[@class='ob-link']")).click();
+
+		driver.findElement(By.xpath("//a[@class='ob-link']")).click();
+
+	  if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/retailer/dashboard")) {
+		  mouseHoverToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]")));
+		  waituntilClickable(driver.findElement(By.xpath("//a[normalize-space()='Settings']")));
+
+	  }
   }	
-    
-	  
-//	  driver.findElement(By.xpath("//a[normalize-space()='Settings']")).click();
-//		} 
- 
-	
+
 
 	@When("Display the Retailer Profile Menu Page")
 	public void display_the_Retailer_Profile_Menu_Page() {

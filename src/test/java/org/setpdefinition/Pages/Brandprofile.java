@@ -85,14 +85,11 @@ public class Brandprofile extends BaseClase{
 	
 	@When("user click on the Save button without enter any data on the mandatory field")
 	public void user_click_on_the_Save_button_without_enter_any_data_on_the_mandatory_field() throws InterruptedException {
-		
-//		JavascriptExecutor j = (JavascriptExecutor)driver;
-//		j.executeScript("window.scroll(0,1000)");
+
 		
 		waituntilClickable(driver.findElement(By.xpath("//button[normalize-space()='Save']")));
 
 	}
-
 
 
 	@Then("user should see the validation error message on the each field")

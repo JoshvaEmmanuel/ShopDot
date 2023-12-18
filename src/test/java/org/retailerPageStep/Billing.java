@@ -7,7 +7,10 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import Utils.PropertiesReader;
 import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -20,7 +23,14 @@ import io.cucumber.java.en.When;
 import junit.framework.Assert;
 
 public class Billing extends BaseClase{
+	public PropertiesReader propertiyReader =null ;
 	public Faker faker;
+	public  static Logger log;
+	public Billing(){
+		log= LogManager.getLogger(Billing.class);
+		propertiyReader=new PropertiesReader();
+		faker=new Faker();
+	}
 	
 	@Given("retailer Launch the Browser and Maximize the Window")
 	public void retailer_Launch_the_Browser_and_Maximize_the_Window() throws Exception {
@@ -37,26 +47,7 @@ public class Billing extends BaseClase{
 		driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys("shopdottesting005@yopmail.com");
 		   driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
 		   driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
-		   
-//		   if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/dashboard")) {
-				
-//			   try {
-//					 
-//				 	WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Settings']"));
-//				            // Attempt to click the element
-//		           element.click();
-//	       } catch (Exception e) {
-//				            // Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
-//				     	WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Settings']"));
-//				     	
-//				       	JavascriptExecutor executor = (JavascriptExecutor)driver;
-//				        
-//				        executor.executeScript("arguments[0].click();", element);
-//				        }
-//			} else {
-				driver.findElement(By.xpath("//a[@class='ob-link']")).click();
 
-//		}   
 		  
 	}
 //01
@@ -64,11 +55,17 @@ public class Billing extends BaseClase{
 	@When("click on the billing menu")
 	public void click_on_the_billing_menu() {
 		faker=new Faker();
+		if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/retailer/dashboard")) {
+			mouseHoverToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]")));
+			waituntilClickable(driver.findElement(By.xpath("//a[normalize-space()='Settings']")));
+
+		}
 	    driver.findElement(By.xpath("//a[@data-link='Billing']")).click();
 	}
 
 	@When("retailer click on the Add new credit card")
 	public void retailer_click_on_the_Add_new_credit_card() {
+
 		driver.findElement(By.xpath("//button[contains(@class,'button-new w-260 button-white-borderd')]")).click();
 	}
 
@@ -156,11 +153,11 @@ public class Billing extends BaseClase{
 	public void redirect_to_the_main_screen() {
 		String text1 = driver.findElement(By.xpath("//h1[normalize-space()='Saved Payment Methods']")).getText();
 		assertEquals(text1, "Saved Payment Methods");
-		System.out.println(text1);
+		log.info(text1);
 		
 		String text2 = driver.findElement(By.xpath("//h1[normalize-space()='Congratulations!']")).getText();
 		assertEquals(text2, "Congratulations!");
-		System.out.println(text2);
+		log.info(text2);
 		
 		driver.findElement(By.xpath("//div[@class='popup-close close_icon']")).click();
 	}

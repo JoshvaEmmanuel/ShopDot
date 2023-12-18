@@ -7,7 +7,7 @@ Feature: As a Retailer, I want to be able to configure my billing information
    Given retailer Launch the Browser and Maximize the Window
     When retailer hit the Shopdot URL
     And retailer Login to the ShopDot Application
-    #And User Click on the Setting button
+    And User Click on the Setting button
 
   @RB01
   Scenario: Initial state without billing setup 
