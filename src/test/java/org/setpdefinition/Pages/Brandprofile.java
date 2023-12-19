@@ -163,7 +163,7 @@ public class Brandprofile extends BaseClase{
 	@When("user upload the logo in the Upload logo field")
 	public void user_upload_the_logo_in_the_Upload_logo_field() throws InterruptedException, AWTException, IOException {
 		
-		driver.findElement(By.xpath("//input[@type='file']")).sendKeys(getAbsolutePath("src/test/resources/test.jpg"));
+		driver.findElement(By.xpath("//input[@type='file']")).sendKeys(getAbsolutePath("C:/Users/Emman/Downloads/download (5).jpeg"));
    
 	}
 	@When("user enter brand name in the Brand name filed")
@@ -187,17 +187,19 @@ public class Brandprofile extends BaseClase{
 
 	@When("user selects three Brand category from the Brand category field")
 	public void user_selects_three_Brand_category_from_the_Brand_category_field() throws InterruptedException {
-		selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[1]")));
-        selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[2]")));  
-	    selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[3]")));
+//		selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[1]")));
+//        selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[2]")));
+//	    selectMultiplecheckBox(driver.findElement(By.xpath("(//input[@name='brand_categories'])[3]")));
+
+		driver.findElement(By.xpath("(//div[@class='checkbox-text'])[1]")).click();
+		driver.findElement(By.xpath("(//div[@class='checkbox-text'])[2]")).click();
 	    Thread.sleep(2000);
 
 	}
-	
 
 	@When("user selects Brand values from the Brand values field")
 	public void user_selects_Brand_values_from_the_Brand_values_field() {
-	    driver.findElement(By.xpath("(//div[@class='checkbox-text'])[14]")).click();
+	    clickBtn(driver.findElement(By.xpath("(//div[@class='checkbox-text'])[14]")));
 	}
 
 	@When("user enters data in the About the brand field box")

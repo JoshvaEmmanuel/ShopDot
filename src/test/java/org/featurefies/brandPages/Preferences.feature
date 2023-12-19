@@ -15,8 +15,8 @@ Feature: Validating Preference menu functionality
   
     And wherein the Wholesale Pricing field shows default is value50% 
     And wherein the Inventory Buffer field shows default is value70%
-    And wherein the Retail Pricing field selects Enforce retail price selected by default
-    And wherein the Return and Refund Policy selected by default
+    And wherein the Retail Pricing field selects "Enforce retail price" by default
+    And wherein the Return and Refund Policy selected by default "Returns and refunds are accepted on a case-by-case basis"
     And user clicks on the Save button without enter any data on the mandatory field
     Then user should see the validation error message below the fields
     And User should not move to the next page

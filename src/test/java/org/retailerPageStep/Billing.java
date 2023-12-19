@@ -53,13 +53,14 @@ public class Billing extends BaseClase{
 //01
 	
 	@When("click on the billing menu")
-	public void click_on_the_billing_menu() {
+	public void click_on_the_billing_menu() throws InterruptedException {
 		faker=new Faker();
-		if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/retailer/dashboard")) {
-			mouseHoverToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]")));
-			waituntilClickable(driver.findElement(By.xpath("//a[normalize-space()='Settings']")));
-
-		}
+//		if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/retailer/dashboard")) {
+//			mouseHoverToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]")));
+//			waituntilClickable(driver.findElement(By.xpath("//a[normalize-space()='Settings']")));
+//
+//		}
+		Thread.sleep(2000);
 	    driver.findElement(By.xpath("//a[@data-link='Billing']")).click();
 	}
 

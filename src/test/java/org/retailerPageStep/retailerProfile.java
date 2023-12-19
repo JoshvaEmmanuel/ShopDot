@@ -54,17 +54,17 @@ public class retailerProfile extends BaseClase{
 //	    throw new cucumber.api.PendingException();
 //	}
 
-	@When("User Click on the Setting button")
-	public void user_Click_on_the_Setting_button() {
+//	@When("User Click on the Setting button")
+//	public void user_Click_on_the_Setting_button() {
+//
+//		driver.findElement(By.xpath("//a[@class='ob-link']")).click();
 
-		driver.findElement(By.xpath("//a[@class='ob-link']")).click();
+//	  if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/retailer/dashboard")) {
+//		  mouseHoverToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]")));
+//		  waituntilClickable(driver.findElement(By.xpath("//a[normalize-space()='Settings']")));
 
-	  if (driver.getCurrentUrl().equalsIgnoreCase("https://qa2.shopdotapp.com/retailer/dashboard")) {
-		  mouseHoverToElement(driver.findElement(By.xpath("(//span[@class='icon'])[2]")));
-		  waituntilClickable(driver.findElement(By.xpath("//a[normalize-space()='Settings']")));
-
-	  }
-  }	
+//	  }
+//  }
 
 
 	@When("Display the Retailer Profile Menu Page")

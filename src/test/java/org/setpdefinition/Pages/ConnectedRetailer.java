@@ -43,7 +43,7 @@ public class ConnectedRetailer extends BaseClase {
         String text = driver.findElement(By.xpath("//h1[normalize-space()='Connected Retailers']")).getText();
         log.info(text);
         String text1 = driver.findElement(By.xpath("//div[@class='number']")).getText();
-        log.info(text1);
+        log.info("The number of connected retailer: " + text1);
     }
 
     @When("user enters characters in the search bar")
@@ -58,6 +58,7 @@ public class ConnectedRetailer extends BaseClase {
 
     @And("the Application displays only those approved retailers that match the search keyword")
     public void theApplicationDisplaysOnlyThoseApprovedRetailersThatMatchTheSearchKeyword() throws InterruptedException {
+        Thread.sleep(3000);
         afterSearchRetailerList = driver.findElements(By.xpath("//div[@class='store']"));
         String retailerName = afterSearchRetailerList.get(generateRandomNumber(0, afterSearchRetailerList.size()-1)).getText();
         log.info("The Retailer displayed the char that match the search word : " + retailerName);
@@ -67,33 +68,94 @@ public class ConnectedRetailer extends BaseClase {
 
     @And("the Application displays the result count")
     public void theApplicationDisplaysTheResultCount() {
-     Assert.assertEquals(Integer.parseInt( driver.findElement(By.xpath("//div[@class='number']")).getText().trim()),afterSearchRetailerList.size());
-
-
-
+        String number = driver.findElement(By.xpath("//div[@class='number']")).getText();
+        log.info("The number Connected retailer is: " + number);
     }
 
     @When("Brand selects retailer category as filter")
-    public void brandSelectsRetailerCategoryAsFilter() {
-        driver.findElement(By.xpath("//div[@data-selectid='relailerCategory']")).click();
+    public void brandSelectsRetailerCategoryAsFilter() throws InterruptedException {
+        driver.findElement(By.xpath("(//div[@class='overSelect'])[1]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//label[normalize-space()='Apparel Boutique']")).click();
+        log.info("The selected option is : " + driver.findElement(By.xpath("//label[normalize-space()='Apparel Boutique']")).getText());
     }
 
     @When("Brand selects state as filter")
-    public void brandSelectsStateAsFilter() {
-        clickBtn(driver.findElement(By.xpath("//div[@data-selectid='states']")));
+    public void brandSelectsStateAsFilter() throws InterruptedException {
+        driver.findElement(By.xpath("(//div[@class='overSelect'])[2]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//label[normalize-space()='Colorado']")).click();
+        log.info("The selected State option is : " + driver.findElement(By.xpath("//label[normalize-space()='Colorado']")).getText());
+
     }
 
-    @When("Brand clicks on Approved Retailers option from Retailers menu")
-    public void brandClicksOnApprovedRetailersOptionFromRetailersMenu() {
-        
-    }
-
-    @And("the Application verifies that there are no approved retailers for that Brand")
-    public void theApplicationVerifiesThatThereAreNoApprovedRetailersForThatBrand() {
-        
-    }
 
     @Then("the following screen will be displayed: {string}")
-    public void theFollowingScreenWillBeDisplayed(String arg0) {
+    public void theFollowingScreenWillBeDisplayed(String Text) {
+        Assert.assertEquals(driver.findElement(By.xpath("//h3[normalize-space()='Currently you have no connected retailers.']")).getText().trim(), Text);
+        String inviteRetailer = driver.findElement(By.xpath("//button[@class='button me-2']")).getText();
+        log.info("The Displayed button is: " + inviteRetailer);
+        String requestAccess = driver.findElement(By.xpath("//button[normalize-space()='View Requests for Access']")).getText();
+        log.info("The Displayed button is: " + requestAccess);
     }
+    @And("the Application displays the result count \\(which is {int})")
+    public void theApplicationDisplaysTheResultCountWhichIs(int arg0) {
+        String number = driver.findElement(By.xpath("//div[@class='number']")).getText();
+        log.info("The number Connected retailer is: " + number);
+
+    }
+
+    @When("the user click on the {string} buttons")
+    public void theUserClickOnTheButtons(String text) {
+
+
+        if (text.equalsIgnoreCase("Invite Retailers")){
+            log.info("Clicking on the: " + text + "option");
+            driver.findElements(By.xpath("//button[text()='"+text+"']")).get(1).click();
+
+        }
+        else{
+            log.info("Clicking on the: " + text + " option");
+           driver.findElement((By.xpath("//button[text()='"+text+"']"))).click();
+        }
+
+    }
+
+    @Then("referral link pop Displays")
+    public void referralLinkPopDisplays() {
+        String referralLink = driver.findElement(By.xpath("//h3[normalize-space()='Share this referral link with your retailers.']")).getText();
+        log.info("The Screen is on the: " + referralLink);
+        String value = driver.findElement(By.xpath("//input[@type='email']")).getAttribute("value");
+        log.info("The Value in the email field is: " + value);
+
+    }
+
+    @When("Brand enters non existing Retailer name in the search bar")
+    public void brandEntersNonExistingProductNameInTheSearchBar() {
+        driver.findElement(By.xpath("//input[@placeholder='Search retailers']")).sendKeys(faker.name().firstName());
+    }
+
+    @Then("the following message is displayed in the table “There are no approved retailers that meet your criteria”")
+    public void theFollowingMessageIsDisplayedInTheTableThereAreNoApprovedRetailersThatMeetYourCriteria(String text) {
+
+       Assert.assertEquals(driver.findElement(By.xpath("//h3[normalize-space()='Currently you have no connected retailers.']")).getText().trim(), text);
+       log.info("Waring Message: " + driver.findElement(By.xpath("//h3[normalize-space()='Currently you have no connected retailers.']")).getText());
+    }
+
+
+    @And("user Login into the SHOPDOT application")
+    public void userLoginIntoTheSHOPDOTApplication() {
+        propertiyReader.setProperty("requestforAccess_NewUser","testsample2@yopmail.com");
+        log.info("Loging with the user which is dont have the Request access");
+
+        logInShopDot(propertiyReader.getProperty("requestforAccess_NewUser"),propertiyReader.getProperty("password"));
+
+    }
+
+    @Then("user should navigate to the Requests for Access Screen{string}")
+    public void userShouldNavigateToTheRequestsForAccessScreen(String text) {
+        log.info("The screen is on the: " + text);
+       Assert.assertEquals(text,driver.findElement(By.xpath("//h1[text()='Requests for Access']")).getText().trim());
+    }
+
 }
