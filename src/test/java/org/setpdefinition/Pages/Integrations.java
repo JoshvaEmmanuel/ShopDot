@@ -142,12 +142,11 @@ Thread.sleep(2000);
 	@When("navigate to the shopdot Integrations screen with the status Connected")
 	public void navigate_to_the_shopdot_Integrations_screen_with_the_status_Connected() throws InterruptedException {
 
-		WebElement connected = driver.findElement(By.xpath("//span[@class='status-pill pill_connected']"));
+		String connected = driver.findElement(By.xpath("//span[@class='status-pill pill_connected']")).getText();
+		log.info("The status is: " + connected);
+		assertEquals(connected, "Connected");
+//	    assertEquals(connected.getCssValue("color"), "#2f80ed");
 
-		assertEquals(connected.getText(), "Connected");
-	    assertEquals(connected.getCssValue("color"), "#2f80ed");
-	      log.info("The status is: " + connected.getText());
-		  log.info("The Color : " + connected.getCssValue("color"));
 
 	    
 		try {

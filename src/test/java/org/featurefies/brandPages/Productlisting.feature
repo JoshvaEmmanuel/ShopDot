@@ -1,4 +1,4 @@
-
+@ProductListing
 Feature: As a Brand, I want to be able to view, search, edit, sort, and filter my product listing 
 
 
@@ -18,9 +18,9 @@ Feature: As a Brand, I want to be able to view, search, edit, sort, and filter m
      And User login to the ShopDot Application
      And User clicks on the products button
      And Displays the Products Listing Screen
-   And user add the Tags for "The Multi-location Snowboard"
+   And user add the Tags for "The Collection Snowboard: Liquid"
    And displays sucessful message
-   And user selects Category for "The Multi-location Snowboard"
+   And user selects Category for "The Collection Snowboard: Liquid"
    And again displays sucessful message
    And the status button become enable
    And the user click on the Inactive button 
@@ -46,7 +46,7 @@ Feature: As a Brand, I want to be able to view, search, edit, sort, and filter m
     And User clicks on the products button
     And Displays the Products Listing Screen
     When Brand enters non existing Product name in the search bar
-    Then the following message is displayed in the table:“There are no products that meet your criteria.”
+    Then the following message is displayed in the table:"There are no products that meet your criteria."
 
 
   
