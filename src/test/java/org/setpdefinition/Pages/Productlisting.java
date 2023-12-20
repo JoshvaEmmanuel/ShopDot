@@ -25,6 +25,7 @@ import io.cucumber.java.en.When;
 import junit.framework.Assert;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class Productlisting extends BaseClase{
 	public String searchbar;
@@ -150,21 +151,28 @@ public class Productlisting extends BaseClase{
 	@When("again displays sucessful message")
 	public void again_displays_sucessful_message() throws InterruptedException {
 		Thread.sleep(1500);
-	    String popup = driver.findElement(By.xpath("//div[@id='1']")).getText();
+	    String popup = driver.findElement(By.xpath("//div[@role='alert']")).getText();
 	    log.info("Category message: " + popup);
 	}
 
 	@When("the status button become enable")
-	public void the_status_button_become_enable() {
-	    boolean enabled = driver.findElement(By.xpath("//span[@class='off']")).isEnabled();
-		if (driver.findElement(By.xpath("//span[@class='off']")).isEnabled());
-		log.info("The Active Button is Disable");
-	    log.info("Button is: "+ enabled);
+	public void the_status_button_become_enable() throws InterruptedException {
+		Thread.sleep(2000);
+	    boolean status = driver.findElement(By.xpath("//span[@class='off']")).isEnabled();
+		assertTrue(status);
 	}
 
 	@When("the user click on the Inactive button")
 	public void the_user_click_on_the_Inactive_button() {
-	    driver.findElement(By.xpath("//span[@class='off']")).click();
+		boolean status = driver.findElement(By.xpath("//span[@class='off']")).isEnabled();
+		if (status){
+			log.info("The status is: " + status);
+			driver.findElement(By.xpath("//span[@class='off']")).click();
+
+		}
+		else {
+			log.info("The button is " + status);
+		}
 	}
 
 	@Then("congratulation Pop up displays")
@@ -206,14 +214,12 @@ public class Productlisting extends BaseClase{
 		driver.findElement(By.xpath("//input[@placeholder='Search product name or SKU']")).sendKeys(faker.name().firstName());
 	}
 
-	@Then("the following message is displayed in the table:{}")
+	@Then("the following message is displayed in the table:{string}")
 	public void theFollowingMessageIsDisplayedInTheTableThereAreNoProductsThatMeetYourCriteria(String text) throws InterruptedException {
-
-		Thread.sleep(3000);
-		log.info("Waring Message Before: " + driver.findElement(By.xpath("//p[text()='There are no products that meet your criteria.']")).getText());
-		assertEquals(driver.findElement(By.xpath("//p[text()='There are no products that meet your criteria.']")).getText().trim(), text);
-		log.info("Waring Message After: " + driver.findElement(By.xpath("//p[text()='There are no products that meet your criteria.']")).getText());
-
+		WebElement noProductError = driver.findElement(By.xpath("//p[text()='There are no products that meet your criteria.']"));
+		log.info("Waring Message Before: " + noProductError.getText());
+		assertEquals(noProductError.getText().trim(), text);
+		
 	}
 
 	@And("user add the Tags for {string}")
@@ -228,7 +234,7 @@ public class Productlisting extends BaseClase{
 	public void userSelectsCategoryFor(String text1) throws InterruptedException {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//p[text()='"+text1+"']/parent::div/parent::div/parent::td/following-sibling::td[2]")).click();
-		Thread.sleep(2000);
+
 		driver.findElement(By.xpath("//div[@id='Men']//div[@class='checkbox-text']")).click();
 		driver.findElement(By.xpath("//div[contains(text(),'Accessories')]")).click();
 		driver.findElement(By.xpath("//div[contains(text(),'Ties & Pocket Squares')]")).click();

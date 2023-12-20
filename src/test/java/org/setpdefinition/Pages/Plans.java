@@ -134,7 +134,7 @@ public Faker faker;
 	    Assert.assertTrue(activate.contains("Activate your products"));
 	    log.info(activate);
 		Thread.sleep(2500);
-		driver.findElement(By.xpath("//button[contains(text(),'Let’s Go!')]")).click();
+		driver.findElement(By.xpath("//button[@class='popup-close button button-dark']")).click();
 	}
 
 	@Then("user will be taken to the next step in onboarding \\(Products Page)")
