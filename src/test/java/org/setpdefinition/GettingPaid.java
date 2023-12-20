@@ -80,15 +80,16 @@ public class GettingPaid extends BaseClase{
 	@When("user selects the option {string} from the Is your business a publicly traded C_Corporation or non-profit?")
 	public void user_selects_the_option_from_the_Is_your_business_a_publicly_traded_C_Corporation_or_non_profit(String string) throws InterruptedException {
 		System.out.println("//input[@value='"+string+"']");
-		Thread.sleep(2000);
-		waituntilClickable(driver.findElement(By.xpath("//input[@value='"+string.toLowerCase()+"']")));
+
+//		waituntilClickable(driver.findElement(By.xpath("//input[@value='"+string.toLowerCase()+"']")));
+		driver.findElement(By.xpath("(//div[@class='radiobox-text'])[2]")).click();
 
 
 	}
 
 	@When("user selects the option {string} from the Are you an authorized signer?")
 	public void user_selects_the_option_from_the_Are_you_an_authorized_signer(String string) throws InterruptedException {
-		Thread.sleep(2000);
+
 		driver.findElements(By.xpath("//span[text()='"+string+"']")).get(1).click();
 
 	}
@@ -129,21 +130,20 @@ public class GettingPaid extends BaseClase{
 		driver.findElement(By.xpath("//div[text()='Select State']/parent::div/following-sibling::div/child::div/child::*[name()='svg']")).click();
 	waituntilClickable(driver.findElement(By.xpath("//div[text()='"+state+"']")));
 	}
-	@When("user select Tax ID {string} Type from Tax ID Type field")
+	@And("user select {string} Type from Business category field")
 	public void userSelectTaxIDTypeFromTaxIDTypeField(String idType) {
-		driver.findElement(By.cssSelector("[value='"+idType+"']"
-		));
+		driver.findElement(By.cssSelector("[value='"+idType+"']"));
 	}
 
 	@When("user enter data in the EIN field")
 	public void user_enter_data_in_the_EIN_field() throws InterruptedException {
 		
-	    driver.findElement(By.cssSelector("[name='employerIdentificationNumber']")).sendKeys(propertiyReader.getProperty("ENI"));
+	    driver.findElement(By.cssSelector("[name='employerIdentificationNumber']")).sendKeys(generateRandom9DigitNumber());
 	}
 
 	@When("user enter email in the Business email address field")
 	public void user_enter_email_in_the_Business_email_address_field() {
-		 driver.findElement(By.xpath("//input[@name='businessEmail']")).sendKeys("Njpixstist@ymail.com");
+		 driver.findElement(By.xpath("//input[@name='businessEmail']")).sendKeys(faker.internet().emailAddress());
 	}
 
 	@When("user enter phone number in the Business phone number field")
@@ -247,20 +247,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 		
 		driver.findElement(By.xpath("//input[@id='react-select-6-input']")).click();
 		
-//		try {
-//
-//			WebElement element = driver.findElement(By.xpath("//div[17]//div[1]//div[1]//div[2]//div[1]"));
-//            // Attempt to click the element
-//            element.click();
-//            
-//        } catch (Exception e) {
-//            // Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
-//        	WebElement element = driver.findElement(By.xpath("//div[17]//div[1]//div[1]//div[2]//div[1]"));
-//        	JavascriptExecutor executor = (JavascriptExecutor)driver;
-//        	
-////            JavascriptExecutor executor = (JavascriptExecutor) driver;
-//            executor.executeScript("arguments[0].click();", element);
-//        }
+
 	    
 	    Robot r = new Robot();
 	    r.keyPress(KeyEvent.VK_ENTER);
@@ -319,21 +306,21 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user enter SSN numer in the Social Security Number field")
 	public void user_enter_SSN_numer_in_the_Social_Security_Number_field() {
-		driver.findElement(By.xpath("//input[@placeholder='123-44-5678']")).sendKeys(propertiyReader.getProperty("SSN")); 
+		driver.findElement(By.xpath("//input[@placeholder='123-44-5678']")).sendKeys(generateRandom9DigitNumber());
 
 	}
 
 	@When("user select Date of birth")
 	public void user_select_Date_of_birth() throws InterruptedException {
 		driver.findElement(By.xpath("//input[@placeholder='MM-DD-YYYY']")).click();
-	    
-	    driver.findElement(By.xpath("//div[@aria-label='Choose Sunday, November 27th, 2005']")).click();
+	    Thread.sleep(6000);
+	    driver.findElement(By.xpath("//div[@aria-label='Choose Tuesday, November 29th, 2005']")).click();
 	}
 
 	@When("user enter Email address")
 	public void user_enter_Email_address() throws InterruptedException {
 		
-	    driver.findElement(By.xpath("//input[@placeholder='yourname@email.com']")).sendKeys(propertiyReader.getProperty("Gemail"));
+	    driver.findElement(By.xpath("//input[@placeholder='yourname@email.com']")).sendKeys(faker.internet().emailAddress());
 	}
 
 	@When("user eneter Home Address")
@@ -408,7 +395,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user enter Routing number")
 	public void user_enter_Routing_number() {
-		driver.findElement(By.xpath("//input[@name='routingNumber']")).sendKeys("061205255");
+		driver.findElement(By.xpath("//input[@name='routingNumber']")).sendKeys(propertiyReader.getProperty("Routingnumber"));
 	}
 
 	@When("navigate to the summary page")
@@ -472,7 +459,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user enter data in the SSN field")
 	public void user_enter_data_in_the_SSN_field() {
-	    driver.findElements(By.xpath("//input[@type='tel']")).get(0).sendKeys(propertiyReader.getProperty("SSN_VALUE"));
+	    driver.findElements(By.xpath("//input[@type='tel']")).get(0).sendKeys(generateRandom9DigitNumber());
 
 	}
 
@@ -530,12 +517,12 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user enter EIN number in Employer Identification Number field")
 	public void user_enter_EIN_number_in_Employer_Identification_Number_field() {
-	    driver.findElement(By.xpath("//input[@placeholder='12-3456789']")).sendKeys("853218579");
+	    driver.findElement(By.xpath("//input[@placeholder='12-3456789']")).sendKeys("813208579");
 	}
 
 	@When("user enter website address in the Business website address field")
 	public void user_enter_website_address_in_the_Business_website_address_field() {
-		driver.findElement(By.xpath("//input[@name='website']")).sendKeys("testing.com");
+		driver.findElement(By.xpath("//input[@name='website']")).sendKeys("tesstling.com");
 	}
 	@When("user select country from Country field.")
 	public void user_select_country_from_Country_field1() throws AWTException, InterruptedException {
@@ -595,14 +582,15 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user enter the SSN number")
 	public void user_enter_the_SSN_number() {
-	    driver.findElement(By.xpath("//input[@placeholder='123-44-5678']")).sendKeys("372370893");
+	    driver.findElement(By.xpath("//input[@placeholder='123-44-5678']")).sendKeys(propertiyReader.getProperty("SSN"));
 	}
 
 	@When("selects the date of birth")
 	public void selects_the_date_of_birth() throws InterruptedException {
+
 		driver.findElement(By.xpath("//input[@placeholder='MM-DD-YYYY']")).click();
-	    
-	    driver.findElement(By.xpath("//div[@aria-label='Choose Sunday, October 30th, 2005']")).click();
+		Thread.sleep(1500);
+	    driver.findElement(By.cssSelector("div[aria-label='Choose Thursday, December 1st, 2005']")).click();
 	}
 
 	@When("user Email address")
@@ -729,8 +717,9 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 
 	@When("user select the state from the select State field")
 	public void user_select_the_state_from_the_select_State_field() throws AWTException, InterruptedException {
+
 		driver.findElement(By.xpath("//input[@id='react-select-4-input']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		Robot r = new Robot();
 	    r.keyPress(KeyEvent.VK_ENTER);
 	    r.keyRelease(KeyEvent.VK_ENTER);
@@ -902,6 +891,7 @@ driver.findElement(By.xpath("//div[text()='United States']")).click();
 		driver.findElement(By.xpath("//div[text()='"+taxID+"']")).click();
 
 	}
+
 
 
 //	@Then("pop-up will display and user click on the Close button")

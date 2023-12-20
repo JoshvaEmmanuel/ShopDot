@@ -7,7 +7,7 @@ Feature: Validating the Retailer Onboarding
   When User hit the Shopdot URL
   And User Login to the ShopDot Application
 #And User navigate to the Getting Started Screen
-  And User Click on the Setting button
+#  And User Click on the Setting button
   And Display the Retailer Profile Menu Page 
   And user enter Company name in Company name field
   And user enter the email in the Contact email field

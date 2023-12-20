@@ -27,7 +27,7 @@ public class Integrations extends BaseClase{
 	}
 	@Given("user launch the browser and Maximize the window")
 	public void User_launch_the_browser_and_Maximize_the_window() throws Exception {
-	    driver= launchBrowser("Chrome");
+	    driver= launchBrowser("firefox");
 	    propertiyReader=new PropertiesReader();
 	    
 	}
@@ -118,36 +118,36 @@ Thread.sleep(2000);
 	    driver.findElement(By.xpath("//input[@id='account_password']")).sendKeys(propertiyReader.getProperty("shopifypass"));
 	    Thread.sleep(2000);
 		waituntilClickable(driver.findElement(By.xpath("//button[@type='submit']")));
+		Thread.sleep(5000);
+		waituntilClickable(driver.findElement(By.xpath("(//button[@type='button'])[9]")));
 
-		waituntilClickable(driver.findElements(By.xpath("//span[text()='Add unlisted sales channel']")).get(1));
-	       
-	    
-	    
-	    
+//		driver.findElement(By.xpath("Polaris-Button__Content_xd1mk")).click();
 		try {
 
 			WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Getting Paid']"));
-            // Attempt to click the element
-            element.click();
-            
-        } catch (Exception e) {
-            // Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
-        	WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Getting Paid']"));
-        	JavascriptExecutor executor = (JavascriptExecutor)driver;
-        	
-            executor.executeScript("arguments[0].click();", element);
-        }
+			// Attempt to click the element
+			element.click();
+
+		} catch (Exception e) {
+			// Handle the exception, e.g., wait for the overlay to disappear or use JavaScript to click
+			WebElement element = driver.findElement(By.xpath("//a[normalize-space()='Getting Paid']"));
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+
+			executor.executeScript("arguments[0].click();", element);
+		}
 	}
+	    
+
 	
 	@When("navigate to the shopdot Integrations screen with the status Connected")
 	public void navigate_to_the_shopdot_Integrations_screen_with_the_status_Connected() throws InterruptedException {
-		WebElement connected = waitforElementVisiblity(driver.findElement(By.xpath("//span[@class='status-pill pill_connected']")));
+
+		WebElement connected = driver.findElement(By.xpath("//span[@class='status-pill pill_connected']"));
 
 		assertEquals(connected.getText(), "Connected");
 	    assertEquals(connected.getCssValue("color"), "#2f80ed");
 	      log.info("The status is: " + connected.getText());
 		  log.info("The Color : " + connected.getCssValue("color"));
-
 
 	    
 		try {

@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(features = "src/test/java/org/featurefies/RetailerPages",glue ={"org.retailerPageStep", "CommonHooks"},
         monochrome = true, dryRun = false,
 plugin = {"pretty","html:RetailerReport/Cucumber-html-report/report.html","junit:RetailerReport/Cucumber-junit/junitreport.xml","json:RetailerReport/Cucumber-Jason-report/jsonreport.json"}
-,tags = "@BL001")
+,tags = "@Brands")
 
 public class
 TestRunnerClass {

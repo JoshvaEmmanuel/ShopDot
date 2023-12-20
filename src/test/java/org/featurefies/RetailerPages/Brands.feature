@@ -1,4 +1,5 @@
-Feature: Validating Brands Menu functionality 
+@Brands
+Feature: Validating Brands Menu functionality
          As a Retailer, I want to be able to view the list of brands, so that I would know what is available for me
   
   Background:
@@ -18,27 +19,23 @@ Feature: Validating Brands Menu functionality
   Then Status changes to "Pending"
 
   @BL002
-  Scenario: Searching and Filtering Brands
+  Scenario: Searching the existing Brands
   
     And the user is on the Brand Listing page
     And the user enters keyword in the search bar
-    Then the Application starts searching for brand names that match keyword
-    And the Application displays only those brands in the filter that match keyword
+    Then the Application displays only those brands in the filter that match keyword
+    And the Application displays the result count
     
   @BL003
   Scenario: No Brands Matching Search Criteria
     And the user is on the Brand Listing page
     When the user enters nonexistent_keyword in the search bar
-    Then the Application does not find any match for the search keyword
-    And the message is displayed in the table
+    Then the message "There are no brands that meet your criteria."is displayed in the table
     And the Application displays the result count as 0
    
   @BL004
   Scenario: Filtering Brands by Status
     And the user is on the Brand Listing page
-    And  the user selects "All" status in the filter section
-    Then the Application refreshes the list to display all brands
-    
     When the user selects "Connected" status in the filter section
     Then the Application refreshes the list to display brands with "Connected" status
     

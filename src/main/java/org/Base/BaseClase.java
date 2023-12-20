@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.IOException;
@@ -45,8 +46,16 @@ public class BaseClase {
 
         try {
             if (browserName.equalsIgnoreCase("chrome")) {
+                ChromeOptions options = new ChromeOptions();
+
+                options.addArguments("start-maximized");
+                options.addArguments("test-type");
+                options.addArguments("disable-notifications");
+                options.addArguments ("autofill.profile_enabled");
+                options.addArguments("--incognito");
+
                 System.setProperty("webdriver.chrome.driver", "C:\\Users\\Emman\\Downloads\\chromedriver-win64 (2)\\chromedriver-win64\\chromedriver.exe");
-                driver = new ChromeDriver();
+                driver = new ChromeDriver(options);
 
             } else if (browserName.equalsIgnoreCase("firefox")) {
                 WebDriverManager.firefoxdriver().setup();
@@ -136,7 +145,7 @@ public class BaseClase {
             System.out.println("Element needs to click");
             element.click();
 
-        }
+}
 
     }
     public void retryClick(WebElement element) {
@@ -403,6 +412,17 @@ public class BaseClase {
         return new File(relativePath).getAbsolutePath();
     }
 
+    public static String generateRandom9DigitNumber() {
+        Random random = new Random();
+        // Generate a random number between 100,000,000 and 999,999,999
+        long randomNumber = 100000000L + (long) (random.nextDouble() * 900000000L);
+        return String.valueOf(randomNumber) ;
+}
+    public static String getRandomStringFromArray(String[] array) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(array.length);
+        return array[randomIndex];
+}
 
 }
 

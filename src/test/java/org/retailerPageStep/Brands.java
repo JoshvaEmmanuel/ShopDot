@@ -1,9 +1,11 @@
 package org.retailerPageStep;
 
+import static org.testng.Assert.*;
 import static org.testng.Assert.assertEquals;
 
 import Utils.PropertiesReader;
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
 import org.Base.BaseClase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,10 +14,14 @@ import org.openqa.selenium.By;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
+import org.openqa.selenium.WebElement;
 import org.setpdefinition.Pages.ConnectedRetailer;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class Brands extends BaseClase{
+	public List<WebElement> afterSearchBrandList;
 	public PropertiesReader propertiyReader =null ;
 	public Faker faker;
 	public  static Logger log;
@@ -89,41 +95,39 @@ public class Brands extends BaseClase{
 		
 		Thread.sleep(4000);
 	}
-
 	@When("the user enters keyword in the search bar")
 	public void the_user_enters_keyword_in_the_search_bar() {
-	    driver.findElement(By.xpath("//input[contains(@placeholder,'Search brands')]")).sendKeys("joshva");
+		List<WebElement> BrandList = driver.findElements(By.xpath("//div[@class='store']"));
+		String type = BrandList.get(generateRandomNumber(0, BrandList.size() - 1)).getText().substring(0, 3);
+		log.info("Entering the Keyword Randomly in the Connected Retailer : " + type );
+		typeText(type,driver.findElement(By.xpath("//input[@type='text']")));
 	}
-
-	@Then("the Application starts searching for brand names that match keyword")
-	public void the_Application_starts_searching_for_brand_names_that_match_keyword() {
-	    driver.findElement(By.xpath(""));
-	}
-
 	@Then("the Application displays only those brands in the filter that match keyword")
-	public void the_Application_displays_only_those_brands_in_the_filter_that_match_keyword() {
-	    
+	public void the_Application_displays_only_those_brands_in_the_filter_that_match_keyword() throws InterruptedException {
+		Thread.sleep(3000);
+		afterSearchBrandList = driver.findElements(By.xpath("//div[@class='store']"));
+		String brandName = afterSearchBrandList.get(generateRandomNumber(0, afterSearchBrandList.size()-1)).getText();
+		log.info("The Retailer displayed the char that match the search word : " + brandName);
+
 	}
-	
 //003
 	@When("the user enters nonexistent_keyword in the search bar")
 	public void the_user_enters_nonexistent_keyword_in_the_search_bar() {
-	    
+		driver.findElement(By.xpath("//input[@type='text']")).sendKeys(faker.name().firstName());
+		WebElement afterSearchList = driver.findElement(By.xpath("//input[@type='text']"));
+		String BrandName = afterSearchList.getText();
+		log.info("The Retailer displayed the char that did not match the search word : " + BrandName);
 	}
 
-	@Then("the Application does not find any match for the search keyword")
-	public void the_Application_does_not_find_any_match_for_the_search_keyword() {
-	    
-	}
-
-	@Then("the message is displayed in the table")
-	public void the_message_is_displayed_in_the_table() {
-	    
+	@Then("the message {string}is displayed in the table")
+	public void theMessageIsDisplayedInTheTable(String text) {
+	    assertEquals(text,driver.findElement(By.xpath("//p[normalize-space()='There are no brands that meet your criteria.']")).getText().trim(),text);
+		log.info("The waring message is: " + driver.findElement(By.xpath("//p[normalize-space()='There are no brands that meet your criteria.']")).getText());
 	}
 
 	@Then("the Application displays the result count as {int}")
 	public void the_Application_displays_the_result_count_as(Integer int1) {
-		String count = driver.findElement(By.xpath("")).getText();
+		String count = driver.findElement(By.xpath("//div[@class='number']")).getText();
 		log.info(count);
 
 	}

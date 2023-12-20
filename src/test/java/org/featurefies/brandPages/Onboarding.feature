@@ -15,7 +15,7 @@ Feature: Validating the Onboarding
     
 
 	Scenario: Login with Valid Credential
-		Given user launch the browser and Maximize window
+		Given user Launch the "chrome" Browser and Maximize the window
     When To launch the Shopdot URL
 	  And User enter the valid EmailId in the emailid field
     And User enter the Valid Password in the Password field
@@ -37,22 +37,22 @@ Feature: Validating the Onboarding
 #	 Then user should see the Sucessful message
 	
 	Scenario: updating Data in the Preferences Page
-	    And wherein the Wholesale Pricing field shows default is value50% 
-	    And wherein the Inventory Buffer field shows default is value70%
-	    And wherein the Retail Pricing field selects Enforce retail price selected by default
-	    And wherein the Return and Refund Policy selected by default
-	    And user enter data on  the Requirements for retailers who want to connect with your brand field
-	    And user enter address in the Address1 field
-	    And user selects Country from the Country field
-	    And user selects State from the State field
-	    And user enter city name on the City field
-	    And user enter data on the Zip field 
-	    And user enter data in the Shipping fee field
-	    And user enter data in the Incremental fee field
-	    And user selects days from the Days to fulfill field 
-	    And user click in the Save button on preferences page
-	    And User is automatically moved to the next page, which is Integrations
-	    Then user should see the Sucessful message in the page
+		And wherein the Wholesale Pricing field shows default is value50%
+		And wherein the Inventory Buffer field shows default is value70%
+		And wherein the Retail Pricing field selects "Enforce retail price" by default
+		And wherein the Return and Refund Policy selected by default "Returns and refunds are accepted on a case-by-case basis"
+		And user enter data on  the Requirements for retailers who want to connect with your brand field
+		And user enter address in the Address1 field
+		And user selects Country from the Country field
+		And user selects State from the State field
+		And user enter city name on the City field
+		And user enter data on the Zip field
+		And user enter data in the Shipping fee field
+		And user enter data in the Incremental fee field
+		And user selects days from the Days to fulfill field
+		And user click in the Save button on preferences page
+		And User is automatically moved to the next page, which is Integrations
+		Then user should see the Sucessful message in the page
 	    
 	     Scenario: Validating Integrations page with entering valid Store Name
 	 And user enter Store name 
@@ -61,59 +61,60 @@ Feature: Validating the Onboarding
 	 #Then it should navigate to the Shopify Login page 
 	 And user Login to the Shopify
 	 And navigate to the shopdot Integrations screen with the status Connected
-#	 
-	 Scenario: Validating Getting Paid Business category as Single member LLC
-	 And Display Gettingpaid menu page
-		 And user selects the option "no" from the Is your business a publicly traded C_Corporation or non-profit?
-		 And user selects the option "Yes" from the Are you an authorized signer?
-   And user click on the Start Application button
-	 And user enter data on the Legal name of business field
-	 And user enter data on the Doing business as field
-	 And user select option in the Business category field
-	 And user enter address in the Business website address field
-		 And user select Tax ID "SINGLE_MEMBER_LLC" Type from Tax ID Type field
-	 And user enter data in the EIN field
-	 And user enter email in the Business email address field
-	 And user enter phone number in the Business phone number field
-	 And user enter address in the Address line1 field
-	 And user enetr address in the Address line2 field
-	 And user select country from Country field
-		 And user select "Alabama" sate from the select State field
-	 And user enter city name in the City Field
-	 And user enter zipcode in the ZIP field
-	 And user select state from the State of incorporation field
-	 And user select date in the Date of incorporation field
-	 And user enter data in the Estimated average sales volume on ShopDot field
-	 And user enter data in the Estimated average wholesale price on ShopDot field
-	 And user select time in the Average delivery time field
-  And user select code from the Merchant category code field
-	 And user enter data in the Product description field
-	 And user click on the save button
-	   #Scenario:
-	 And user enter first name in the Legal name of business representative field
-	 And user enter last name in the Legal name of business representative field
-	 And user enter phone numer in the Phone number field
-	 And user enter SSN numer in the Social Security Number field
-	 And user select Date of birth 
-	 And user enter Email address
-	 And user eneter Home Address 
-	 And user select Country
-	 And user select State
-	 And user enter City name 
-	 And user enter ZIP
-	 And user selects Secondary identification
-	 And click on the Save and Next button
-	   #Scenario:
-	 And user enter name on the Name of the bank account holder field
-	 And user select Bank account type
-	 And user enter Account number
-	 And user enter Routing number
-	 And click on the Save and Next button
-	 And navigate to the summary page
-	 And user click on the checkbox
-	 And user click on the submit button
-#	 Then pop-up will display and user click on the Close button
-	 #And user should see the account satus as pending
+#
+
+	Scenario: Validating Getting Paid Business category as Single member LLC
+		And Display Gettingpaid menu page
+		And user selects the option "no" from the Is your business a publicly traded C_Corporation or non-profit?
+		And user selects the option "Yes" from the Are you an authorized signer?
+		And user click on the Start Application button
+		And user enter data on the Legal name of business field
+		And user enter data on the Doing business as field
+		And user select option in the Business category field
+		And user enter address in the Business website address field
+		And user select "SINGLE_MEMBER_LLC" Type from Business category field
+		And user select Tax ID Type as "Employer Identification Number (EIN)"
+		And user enter data in the EIN field
+		And user enter email in the Business email address field
+		And user enter phone number in the Business phone number field
+		And user enter address in the Address line1 field
+		And user enetr address in the Address line2 field
+		And user select country from Country field
+		And user select "Alabama" sate from the select State field
+		And user enter city name in the City Field
+		And user enter zipcode in the ZIP field
+		And user select state from the State of incorporation field
+		And user select date in the Date of incorporation field
+		And user enter data in the Estimated average sales volume on ShopDot field
+		And user enter data in the Estimated average wholesale price on ShopDot field
+		And user select time in the Average delivery time field
+		And user select code from the Merchant category code field
+		And user enter data in the Product description field
+		And user click on the save button
+   #Scenario:
+		And user enter first name in the Legal name of business representative field
+		And user enter last name in the Legal name of business representative field
+		And user enter phone numer in the Phone number field
+		And user enter SSN numer in the Social Security Number field
+		And user select Date of birth
+		And user enter Email address
+		And user eneter Home Address
+		And user select Country
+		And user select State
+		And user enter City name
+		And user enter ZIP
+		And user selects Secondary identification
+		And click on the Save and Next button
+   #Scenario:
+		And user enter name on the Name of the bank account holder field
+		And user select Bank account type
+		And user enter Account number
+		And user enter Routing number
+		And click on the Save and Next button
+		And navigate to the summary page
+		And user click on the checkbox
+		And user click on the submit button
+		Then pop-up will display and user click on the Close button
 
 	  Scenario: Validating the Plans Functionality by choosing Growth Plan for the new user
 	  

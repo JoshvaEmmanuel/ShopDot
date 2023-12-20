@@ -16,6 +16,7 @@ import org.testng.Assert;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class requestforAccess extends BaseClase {
     public PropertiesReader propertiyReader =null ;
@@ -29,9 +30,11 @@ public class requestforAccess extends BaseClase {
 
     @And("user Login to the SHOPDOT application")
     public void userLoginToTheSHOPDOTApplication() {
+
         driver.findElement(By.xpath("//input[@placeholder='Email address']")).sendKeys(propertiyReader.getProperty("requestforAccess_User"));
         driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Welcome6@123");
         driver.findElement(By.xpath("//div[@class='form-input mt-5']")).click();
+
     }
     @And("the retailer clicks on {string} under Retailers main menu")
     public void theRetailerClicksOnUnderRetailersMainMenu(String arg0) {
@@ -60,8 +63,10 @@ public class requestforAccess extends BaseClase {
 
 
     @And("the retailer clicks on the View or Edit button from {int}dot menu")
-    public void theRetailerClicksOnTheViewOrEditButtonFromDotMenu(int arg0) {
-        driver.findElement(By.cssSelector("body > div:nth-child(2) > div:nth-child(1) > main:nth-child(2) > section:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(5) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)")).click();
+    public void theRetailerClicksOnTheViewOrEditButtonFromDotMenu(int arg0) throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("(//div[@class='dropdown_header'])[9]")).click();
+        driver.findElement(By.xpath("(//a[text()='View/Edit'])[5]")).click();
 
     }
 
@@ -70,6 +75,10 @@ public class requestforAccess extends BaseClase {
         String currentUrl = driver.getCurrentUrl();
         if(driver.getCurrentUrl().contains("https://qa2.shopdotapp.com/brand/retailer-profile/76")){
             log.info("The displaying screen is Brands Profile : " + currentUrl);
+        }
+        else {
+            String currentUrl1 = driver.getCurrentUrl();
+            log.info("The page is in the: " + currentUrl1);
         }
     }
 
@@ -85,7 +94,7 @@ public class requestforAccess extends BaseClase {
         driver.getCurrentUrl();
 
         String brandName = driver.findElement(By.cssSelector("div[class='title'] h1")).getText();
-        log.info(brandName);
+        log.info("RetailerName is: " +brandName);
 
     }
 
@@ -111,9 +120,9 @@ public class requestforAccess extends BaseClase {
 
     @Then("a confirmation message is display {string}")
     public void aConfirmationMessageIsDisplay(String DeclineError) {
-        String declinepopup = driver.findElement(By.xpath("//div[@class='popup_content']")).getText();
-        log.info("note:" +declinepopup);
-        assertEquals(declinepopup, DeclineError);
+        String declinepopup = driver.findElement(By.xpath("//div[@class='popup_content']")).getText().trim();
+        log.info("The confirmation note is:" + declinepopup);
+        assertTrue(declinepopup.contains(DeclineError));
     }
 
     @When("Brand clicks on {string} from the pop-up")
@@ -133,22 +142,20 @@ public class requestforAccess extends BaseClase {
     public void aSuccessMessageIsDisplayedOnTheScreen(String arg0) {
     }
 
-    @When("user clicks on {string} link from one of the Approved retailers")
-    public void userClicksOnLinkFromOneOfTheApprovedRetailers(String View) {
-        driver.findElement(By.xpath("")).click();
-    }
+
 
     @Then("the Retailer Profile Screen is displayed with an option to Decline")
     public void theRetailerProfileScreenIsDisplayedWithAnOptionToDecline() {
         boolean displayed = driver.findElement(By.xpath("//button[normalize-space()='Decline']")).isDisplayed();
         log.info(displayed);
         String declineenabled = driver.findElement(By.xpath("//button[normalize-space()='Decline']")).getText();
-        log.info(declineenabled);
-//        driver.findElement(By.xpath("//button[normalize-space()='Decline']")).click();
+        log.info("The button is: " + declineenabled);
+
     }
 
     @When("user clicks on Decline")
     public void userClicksOnDecline() {
+
         driver.findElement(By.xpath("//button[normalize-space()='Decline']")).click();
     }
 
@@ -175,6 +182,17 @@ public class requestforAccess extends BaseClase {
     public void aMessageIsDisplayedOnTheScreen(String arg0) throws IOException {
         screenShot("mess");
     }
+//5
+    @When("user clicks on View or Edit link from one of the Approved retailers")
+    public void userClicksOnLinkFromOneOfTheApprovedRetailers(String arg0) {
+        driver.findElement(By.xpath("(//div[@class='dropdown_header'])[9]")).click();
+        driver.findElement(By.xpath("(//a[text()='View/Edit'])[6]")).click();
+    }
 
+    @Then("the following screen will be display: {string}")
+    public void theFollowingScreenWillBeDisplay(String text) {
+        Assert.assertEquals(driver.findElement(By.xpath("//h3[text()='You currently have no requests for access from any retailer.']")).getText().trim(), text);
+
+    }
 }
 

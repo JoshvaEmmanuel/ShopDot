@@ -6,7 +6,10 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Iterator;
 
+import com.github.javafaker.Faker;
 import org.Base.BaseClase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,10 +24,19 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import junit.framework.Assert;
+import org.setpdefinition.GettingPaid;
 
 public class Plans extends BaseClase{
 //	PropertiesReader p=null;
-	
+public Faker faker;
+	public PropertiesReader propertiyReader =null ;
+	public  static Logger log;
+
+	public Plans(){
+		log= LogManager.getLogger(Plans.class);
+		propertiyReader=new PropertiesReader();
+		faker=new Faker();
+	}
 	@Given("user lauch the browser and Maximize the Window")
 	public void user_lauch_the_browser_and_Maximize_the_Window() throws Exception {
 	    driver = launchBrowser("chrome");
@@ -41,7 +53,7 @@ public class Plans extends BaseClase{
 //		 p = new PropertiesReader();
 		
 	    pojoSignInpage g = new pojoSignInpage(driver);
-	    sendText(g.getEmail(), "testsample9@yopmail.com");
+	    sendText(g.getEmail(), propertiyReader.getProperty("PLANSLOGIN"));
 	    sendText(g.getPassword(), "Welcome6@123");
 	    clickBtn(g.getLogin());
 	    
@@ -102,29 +114,35 @@ public class Plans extends BaseClase{
 	    driver.findElement(By.xpath("//button[normalize-space()='Confirm']")).click();
 	}
 	@Then("display Pop-up message and user clicks side arrow button")
-	public void display_Pop_up_message_and_user_clicks_side_arrow_button() {
-		driver.findElement(By.xpath("//div[@class='slick-slide slick-active slick-current']//div//li[@class='slick-slide']")).click();
-		driver.findElement(By.xpath("//div[@class='slick-slide slick-active slick-current']//div//li[@class='slick-slide']")).click();
-		String pop = driver.findElement(By.xpath("//div[@class='slick-slide slick-active slick-current']//div//li[@class='slick-slide']")).getText();
-	    Assert.assertEquals(pop, "Nice work! Your set-up is almost complete");
-	    System.out.println(pop);
-		driver.findElement(By.xpath("//button[normalize-space()='Next']")).click();
-	
+	public void display_Pop_up_message_and_user_clicks_side_arrow_button() throws InterruptedException {
+
+		String pop = driver.findElement(By.xpath("//div[@class='h1 text-dark']")).getText().trim();
+		log.info("The received message is: " + pop);
+		Assert.assertTrue(pop.contains("Nice work!") );
+
+		for (int i = 0; i < 3; i++) {
+			Thread.sleep(3000);
+			log.info("it is clicked" + i);
+			driver.findElement(By.xpath("//button[@class='slick-arrow slick-next']")).click();
+		}
+
 	}
 
 	@Then("user click on the lets go button")
-	public void user_click_on_the_lets_go_button() {
-		String activate = driver.findElement(By.xpath("//div[contains(text(),'Activate your products')]")).getText();
-	    Assert.assertEquals(activate, "Activate your products");
-	    System.out.println(activate);
+	public void user_click_on_the_lets_go_button() throws InterruptedException {
+		String activate = driver.findElement(By.xpath("//div[contains(text(),'Activate your products')]")).getText().trim();
+	    Assert.assertTrue(activate.contains("Activate your products"));
+	    log.info(activate);
+		Thread.sleep(2500);
 		driver.findElement(By.xpath("//button[contains(text(),'Let’s Go!')]")).click();
 	}
 
 	@Then("user will be taken to the next step in onboarding \\(Products Page)")
 	public void user_will_be_taken_to_the_next_step_in_onboarding_Products_Page() {
 	    String pro = driver.findElement(By.xpath("//h1[normalize-space()='Products']")).getText();
+		log.info("The Displayed Page is : " +pro);
 	    Assert.assertEquals(pro, "Products");
-	    System.out.println(pro);
+
 	}
 //	Growth
 	
@@ -194,25 +212,25 @@ public class Plans extends BaseClase{
 	    driver.findElement(By.xpath("//input[contains(@placeholder,'New York')]")).sendKeys("NY");
 	}
 
-
 	@When("user the ZIP")
 	public void user_the_ZIP() {
-	    driver.findElement(By.xpath("//input[@placeholder='12345']")).sendKeys("12345");
+
+		driver.findElement(By.xpath("//input[@placeholder='12345']")).sendKeys("12345");
 	}
 
 	@When("user click on the Submit button")
-	public void user_click_on_the_Submit_button() {
+	public void user_click_on_the_Submit_button() throws InterruptedException {
 	    driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
-	    
-	    driver.findElement(By.tagName("body")).sendKeys(Keys.ESCAPE);
-	    
-	    driver.switchTo().frame("intercom-frame");
-	    for (int i = 0; i < 3; i++) {
-	    	driver.findElement(By.xpath("//button[@class='slick-arrow slick-next']")).click();
-		}
-	    driver.findElement(By.xpath("//button[@class='popup-close button button-dark']")).click();
-	    
-	    driver.switchTo().defaultContent();
+
+
+//	    driver.switchTo().frame("intercom-frame");
+//	    for (int i = 1; i <= 3; i++) {
+//			Thread.sleep(3000);
+//			log.info("it is clicked: " + i);
+//	    	driver.findElement(By.xpath("//button[@class='slick-arrow slick-next']")).click();
+//		}
+//	    driver.findElement(By.xpath("//button[@class='popup-close button button-dark']")).click();
+
 	}
 
 // Scale Plan

@@ -8,7 +8,7 @@ Given User Launch the Browser and Maximize the Window
 When User hit the Shopdot URL
 And User Login to the ShopDot Application
 #And User navigate to the Getting Started Screen
-And User Click on the Setting button
+#And User Click on the Setting button
 And Display the Retailer Profile Menu Page 
 
 @RP001

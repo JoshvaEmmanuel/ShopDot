@@ -17,7 +17,8 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Doing business as field
    And user select option in the Business category field
    And user enter address in the Business website address field
-   And user select Tax ID "SINGLE_MEMBER_LLC" Type from Tax ID Type field
+   And user select "SINGLE_MEMBER_LLC" Type from Business category field
+   And user select Tax ID Type as "Employer Identification Number (EIN)"
    And user enter data in the EIN field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
@@ -219,7 +220,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Legal name of business field
    And user enter data on the Doing business as field
    And user select an option LLC in the Business category field
-   And user enter EIN number in Employer Identification Number field
+   And user enter data in the EIN field
    And user enter website address in the Business website address field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
@@ -272,7 +273,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Legal name of business field
    And user enter data on the Doing business as field
    And user select an option LLP in the Business category field
-   And user enter EIN number in Employer Identification Number field
+   And user enter data in the EIN field
    And user enter website address in the Business website address field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
@@ -326,7 +327,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Legal name of business field
    And user enter data on the Doing business as field
    And user select an option Partnership in the Business category field
-   And user enter EIN number in Employer Identification Number field
+   And user enter data in the EIN field
    And user enter website address in the Business website address field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
@@ -380,7 +381,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Legal name of business field
    And user enter data on the Doing business as field
    And user select an Option S_CORP in the Business category field
-   And user enter EIN number in Employer Identification Number field
+   And user enter data in the EIN field
    And user enter website address in the Business website address field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
@@ -434,7 +435,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Legal name of business field
    And user enter data on the Doing business as field
    And user select an Option C_CORP - Not Publicly Traded in the Business category field
-   And user enter EIN number in Employer Identification Number field
+   And user enter data in the EIN field
    And user enter website address in the Business website address field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
