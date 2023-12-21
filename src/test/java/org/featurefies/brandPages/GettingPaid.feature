@@ -39,11 +39,11 @@ Feature: Validating gettingPaid menu functionality
    #Scenario:
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field
-   And user enter SSN numer in the Social Security Number field
+   And user enter phone number in the Phone number field
+   And user enter SSN number in the Social Security Number field
    And user select Date of birth 
    And user enter Email address
-   And user eneter Home Address 
+   And user enter Home Address
    And user select Country
    And user select State
    And user enter City name 
@@ -69,6 +69,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Doing business as field
    And user select option in the Business category field
    And user enter address in the Business website address field
+   And user select "SINGLE_MEMBER_LLC" Type from Business category field
    And user select Tax ID Type as "Social Security Number (SSN)"
    And user enter data in the SSN field
    And user enter email in the Business email address field
@@ -79,7 +80,7 @@ Feature: Validating gettingPaid menu functionality
    And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
-      And user select "California" sate incorporaion from the select State field
+   And user select "California" sate incorporaion from the select State field
    And user select date in the Date of incorporation field
    And user enter data in the Estimated average sales volume on ShopDot field
    And user enter data in the Estimated average wholesale price on ShopDot field
@@ -90,11 +91,11 @@ Feature: Validating gettingPaid menu functionality
 #Business Representative
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field
-   And SSN numer should have filled as like in the Business Details page
+   And user enter phone number in the Phone number field
+   And SSN number should have filled as like in the Business Details page
    And user select Date of birth 
    And user enter Email address
-   And user eneter Home Address 
+   And user enter Home Address
    And user select Country
    And user select State
    And user enter City name 
@@ -120,17 +121,17 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Doing business as field
    And user select an option Sole Proprietor in the Business category field
    And user enter address in the Business website address field
-   And user select Tax ID Type from Tax ID Type field
+   And user select Tax ID Type as "Employer Identification Number (EIN)"
    And user enter data in the EIN field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select country from Country field
-   And user select sate from the select State field
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
-   And user select state from the State of incorporation field
+   And user select "California" sate incorporaion from the select State field
    And user select date in the Date of incorporation field
    And user enter data in the Estimated average sales volume on ShopDot field
    And user enter data in the Estimated average wholesale price on ShopDot field
@@ -141,11 +142,11 @@ Feature: Validating gettingPaid menu functionality
    #:Business Representative
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field
-   And user enter SSN numer in the Social Security Number field
+   And user enter phone number in the Phone number field
+   And user enter SSN number in the Social Security Number field
    And user select Date of birth 
    And user enter Email address
-   And user eneter Home Address 
+   And user enter Home Address
    And user select Country
    And user select State
    And user enter City name 
@@ -170,14 +171,14 @@ Feature: Validating gettingPaid menu functionality
    And user enter data on the Doing business as field
    And user select an option Sole Proprietor in the Business category field
    And user enter address in the Business website address field
-   And user select Tax ID Type as Social Security Number
+   And user select Tax ID Type as "Social Security Number (SSN)"
    And user enter data in the SSN field
    And user enter email in the Business email address field
    And user enter phone number in the Business phone number field
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select country from Country field
-   And user select sate from the select State field
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user select state from the State of incorporation field
@@ -191,11 +192,11 @@ Feature: Validating gettingPaid menu functionality
 #Business Representative
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field
-   And SSN numer should have filled as like in the Business Details page
+   And user enter phone number in the Phone number field
+   And SSN number should have filled as like in the Business Details page
    And user select Date of birth 
    And user enter Email address
-   And user eneter Home Address 
+   And user enter Home Address
    And user select Country
    And user select State
    And user enter City name 
@@ -227,7 +228,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select country from Country field.
-   And user select state from the select State field.
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user select state from the State of incorporation field.
@@ -241,7 +242,7 @@ Feature: Validating gettingPaid menu functionality
    #
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field 
+   And user enter phone number in the Phone number field
    And user enter the SSN number
    And selects the date of birth
    And user enter Email address
@@ -280,7 +281,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user select the country from Country field
-   And user select the state from the select State field
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user select the state from the State of incorporation field
@@ -294,7 +295,7 @@ Feature: Validating gettingPaid menu functionality
    #
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field 
+   And user enter phone number in the Phone number field
    And user enter the SSN number
    And selects the date of birth
    And user enter Email address
@@ -334,7 +335,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user selects country from Country field
-   And user selects state from the select State field
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user selects state from the State of incorporation field
@@ -348,7 +349,7 @@ Feature: Validating gettingPaid menu functionality
    #
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field 
+   And user enter phone number in the Phone number field
    And user enter the SSN number
    And selects the date of birth
    And user enter Email address
@@ -388,7 +389,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user selects country from Country field
-   And user selects state from the select State field
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user selects state from the State of incorporation field
@@ -402,7 +403,7 @@ Feature: Validating gettingPaid menu functionality
    #
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field 
+   And user enter phone number in the Phone number field
    And user enter the SSN number
    And selects the date of birth
    And user enter Email address
@@ -442,7 +443,7 @@ Feature: Validating gettingPaid menu functionality
    And user enter address in the Address line1 field
    And user enetr address in the Address line2 field
    And user selects country from Country field
-   And user selects state from the select State field
+   And user select "Alabama" sate from the select State field
    And user enter city name in the City Field
    And user enter zipcode in the ZIP field
    And user selects state from the State of incorporation field
@@ -456,7 +457,7 @@ Feature: Validating gettingPaid menu functionality
    #
    And user enter first name in the Legal name of business representative field
    And user enter last name in the Legal name of business representative field
-   And user enter phone numer in the Phone number field 
+   And user enter phone number in the Phone number field
    And user enter the SSN number
    And selects the date of birth
    And user enter Email address

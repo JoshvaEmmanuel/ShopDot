@@ -21,7 +21,7 @@ Feature: Validating the Onboarding
     And User enter the Valid Password in the Password field
     And User clicks on the SignIn button
     
-	 Scenario: Update Brand Profile Page
+#	 Scenario: Update Brand Profile Page
 	 And user enter company name on the Company name field
 	 And user enter email on the Contact email field
 	 And user enter phone numer in the Contact phone number field
@@ -36,7 +36,7 @@ Feature: Validating the Onboarding
 	 And User is automatically moved to the next page, which is Prefernces Page
 #	 Then user should see the Sucessful message
 	
-	Scenario: updating Data in the Preferences Page
+#	Scenario: updating Data in the Preferences Page
 		And wherein the Wholesale Pricing field shows default is value50%
 		And wherein the Inventory Buffer field shows default is value70%
 		And wherein the Retail Pricing field selects "Enforce retail price" by default
@@ -54,7 +54,7 @@ Feature: Validating the Onboarding
 		And User is automatically moved to the next page, which is Integrations
 		Then user should see the Sucessful message in the page
 	    
-	     Scenario: Validating Integrations page with entering valid Store Name
+#	     Scenario: Validating Integrations page with entering valid Store Name
 	 And user enter Store name 
 	 And user click on the Connect button
 	 And user should see the sucessful message on the page 
@@ -63,7 +63,7 @@ Feature: Validating the Onboarding
 	 And navigate to the shopdot Integrations screen with the status Connected
 #
 
-	Scenario: Validating Getting Paid Business category as Single member LLC
+#	Scenario: Validating Getting Paid Business category as Single member LLC
 		And Display Gettingpaid menu page
 		And user selects the option "no" from the Is your business a publicly traded C_Corporation or non-profit?
 		And user selects the option "Yes" from the Are you an authorized signer?
@@ -116,7 +116,7 @@ Feature: Validating the Onboarding
 		And user click on the submit button
 		Then pop-up will display and user click on the Close button
 
-	  Scenario: Validating the Plans Functionality by choosing Growth Plan for the new user
+#	  Scenario: Validating the Plans Functionality by choosing Growth Plan for the new user
 	  And user click on the Select Plan button on the Growth a confirmation window appears with a field to enter credit card information   
 	  And user enter First Name
 	  And user enter Last Name

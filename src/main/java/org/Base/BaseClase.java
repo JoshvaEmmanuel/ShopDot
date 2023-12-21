@@ -253,14 +253,16 @@ public class BaseClase {
     }
 
 
-    public static void screenShot(String imgName) throws IOException {
+    public static void screenShot(String imgName)  {
         try {
             TakesScreenshot ts = (TakesScreenshot) driver;
             File src = ts.getScreenshotAs(OutputType.FILE);
-            File des = new File("./ScreenShot/img.png");
+            File des = new File("./ScreenShot/"+imgName+".png");
             FileUtils.copyFile(src, des);
         } catch (WebDriverException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

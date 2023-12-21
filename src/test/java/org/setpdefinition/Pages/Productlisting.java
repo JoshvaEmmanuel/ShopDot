@@ -243,4 +243,50 @@ public class Productlisting extends BaseClase{
 	}
 
 
+	@When("Brand click on the Download All Products button")
+	public void brandClickOnTheDownloadAllProductsButton() throws InterruptedException {
+		Thread.sleep(3000);
+		clickBtn(driver.findElement(By.xpath("//button[@class='button button-blue small']")));
+
+		assertTrue(waitforElementVisiblity(driver.findElement(By.xpath("//div[text()='All products will be downloaded into an Excel format and will be sent to your email when the file is ready']"))).isDisplayed());
+	}
+
+	@Then("Pop-up will display on the screen")
+	public void popUpWillDisplayOnTheScreen() {
+		assertTrue(driver.findElement(By.xpath("//div[text()='All products will be downloaded into an Excel format and will be sent to your email when the file is ready']")).isDisplayed());
+	log.info(driver.findElement(By.xpath("//div[text()='All products will be downloaded into an Excel format and will be sent to your email when the file is ready']")).getText());
+
+
+	}
+
+	@When("Brand click on the Active Button")
+	public void brandClickOnTheActiveButton() {
+		clickBtn(driver.findElement(By.xpath("//a[normalize-space()='Active']")));
+
+	}
+
+	@Then("Displays only the Active Products")
+	public void displaysOnlyTheActiveProducts() {
+		List<WebElement> activeProducts = driver.findElements(By.xpath("//p[@class='my_list-product-title cursor-pointer']/parent::div/parent::div/parent::td/following-sibling::td[1]"));
+		for (WebElement activeProduct:activeProducts) {
+
+			assertTrue(activeProduct.getText().contains("Active"));
+		}
+		log.info("The No of Active products is: " + activeProducts.size());
+	}
+
+	@When("Brand click on the Inactive Button")
+	public void brandClickOnTheInactiveButton() {
+		clickBtn(driver.findElement(By.xpath("//a[normalize-space()='Inactive']")));
+	}
+
+	@Then("Displays only the Inactive Products")
+	public void displaysOnlyTheInactiveProducts() {
+		List<WebElement> InactiveProducts = driver.findElements(By.xpath("//p[@class='my_list-product-title cursor-pointer']/parent::div/parent::div/parent::td/following-sibling::td[1]"));
+		for (WebElement InactiveProduct:InactiveProducts) {
+
+			assertTrue(InactiveProduct.getText().contains("Inactive"));
+		}
+		log.info("The No of Inactive products is: " + InactiveProducts.size());
+	}
 }

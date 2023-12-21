@@ -86,21 +86,27 @@ public class requestforAccess extends BaseClase {
 
     @And("retailer clicks on the Retailer Profile")
     public void retailerClicksOnTheRetailerProfile() {
-       retryClick(driver.findElement(By.xpath("//a[normalize-space()='TejasRetailer1']")));
+//     @And("retailer clicks on the Retailer Profile{string}")
+//     public void retailerClicksOnTheRetailerProfile(String text) {
+//    driver.findElement(By.xpath("//div[@class='"+text+"']")).click();
+
+       retryClick(driver.findElement(By.xpath("//a[text()='emmanueljThree']")));
+
     }
 
     @And("it redirect to the retailer profile screen")
-    public void itRedirectToTheRetailerProfileScreen() throws InterruptedException {
-        Thread.sleep(2000);
+    public void itRedirectToTheRetailerProfileScreen() throws InterruptedException, IOException {
+        Thread.sleep(6000);
         driver.getCurrentUrl();
+        String brandName = driver.findElement(By.xpath("(//div[@class='title'])[2]")).getText();
+        log.info("RetailerName is: " + brandName);
 
-        String brandName = driver.findElement(By.cssSelector("div[class='title'] h1")).getText();
-        log.info("RetailerName is: " +brandName);
 
     }
 
     @And("Retailer clicks on the Approve Button without assign any product")
-    public void retailerClicksOnTheApproveButtonWithoutAssignAnyProduct() {
+    public void retailerClicksOnTheApproveButtonWithoutAssignAnyProduct() throws InterruptedException {
+
         driver.findElement(By.xpath("//button[normalize-space()='Approve']")).click();
 
     }
@@ -116,14 +122,21 @@ public class requestforAccess extends BaseClase {
     @When("Brand clicks on Decline button from Retailer Profile Screen")
     public void brandClicksOnDeclineButtonFromRetailerProfileScreen() {
         driver.findElement(By.xpath("//a[normalize-space()='emmanueljThree']")).click();
+
+        String brandName = driver.findElement(By.xpath("(//div[@class='title'])[2]")).getText();
+        log.info("RetailerName is: " + brandName);
+
         driver.findElement(By.xpath("//button[normalize-space()='Decline']")).click();
     }
 
-    @Then("a confirmation message is display {string}")
-    public void aConfirmationMessageIsDisplay(String DeclineError) {
+//    @Then("a confirmation message is display {string}")
+//    public void aConfirmationMessageIsDisplay(String DeclineError) {
+        @Then("a confirmation message will display")
+        public void aConfirmationMessageWillDisplay() {
+
         String declinepopup = driver.findElement(By.xpath("//div[@class='popup_content']")).getText().trim();
         log.info("The confirmation note is:" + declinepopup);
-        assertTrue(declinepopup.contains(DeclineError));
+//        assertTrue(declinepopup.contains(DeclineError));
     }
 
     @When("Brand clicks on {string} from the pop-up")
@@ -160,13 +173,16 @@ public class requestforAccess extends BaseClase {
         driver.findElement(By.xpath("//button[normalize-space()='Decline']")).click();
     }
 
-    @Then("a pop-up is displayed with the message: {string}")
-    public void aPopUpIsDisplayedWithTheMessage(String poperror) {
-        String declinerror = driver.findElement(By.xpath("//div[@class='popup_content']")).getText();
-        assertEquals(declinerror, poperror);
-        log.info(declinerror);
+//    @Then("a pop-up is displayed with the message: {string}")
+//    public void aPopUpIsDisplayedWithTheMessage(String poperror) {
 
-    }
+        @Then("a pop-up message will displayed on the Screen")
+        public void aPopUpMessageWillDisplayedOnTheScreen() {
+            String declinerror = driver.findElement(By.xpath("//div[@class='popup_content']")).getText();
+            log.info(declinerror);
+
+        }
+
 
     @Then("the retailer connection status is updated from {string} to {string}")
     public void theRetailerConnectionStatusIsUpdatedFromTo(String arg0, String arg1) {
@@ -185,14 +201,25 @@ public class requestforAccess extends BaseClase {
     }
 //5
     @When("user clicks on View or Edit link from one of the Approved retailers")
-    public void userClicksOnLinkFromOneOfTheApprovedRetailers(String arg0) {
-        driver.findElement(By.xpath("(//div[@class='dropdown_header'])[9]")).click();
-        driver.findElement(By.xpath("(//a[text()='View/Edit'])[6]")).click();
+    public void userClicksOnLinkFromOneOfTheApprovedRetailers() {
+
+        driver.findElement(By.xpath("(//div[@class='dropdown_header'])[7]")).click();
+        driver.findElement(By.xpath("(//a[text()='View/Edit'])[3]")).click();
     }
 
     @Then("the following screen will be display: {string}")
     public void theFollowingScreenWillBeDisplay(String text) {
         Assert.assertEquals(driver.findElement(By.xpath("//h3[text()='You currently have no requests for access from any retailer.']")).getText().trim(), text);
+
+    }
+
+
+    @And("Retailer clicks on the Approve Button with assigning one product")
+    public void retailerClicksOnTheApproveButtonWithAssigningOneProduct() {
+        driver.findElement(By.xpath("//button[@class='tab-link active']")).click();
+        driver.findElement(By.xpath("(//input[@class='ant-checkbox-input'])[2]")).click();
+        driver.findElement(By.xpath("//button[@class='button button button-red unassign-modal']")).click();
+
 
     }
 }

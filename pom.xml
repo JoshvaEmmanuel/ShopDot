@@ -31,6 +31,7 @@
 			<artifactId>cucumber-java</artifactId>
 			<version>4.8.0</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -38,12 +39,15 @@
 			<version>4.8.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-core</artifactId>
 			<version>4.8.0</version>
 		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
@@ -100,8 +104,18 @@
 			<artifactId>javafaker</artifactId>
 			<version>1.0.2</version>
 		</dependency>
-		
 
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports-cucumber4-adapter -->
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports-cucumber4-adapter</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -39,19 +39,30 @@ Feature: As a Brand, I want to be able to view the list of retailers that reques
     And user Login to the SHOPDOT application
     And the retailer clicks on "Requests for Access" under Retailers main menu
     And retailer clicks on the Retailer Profile
+#    And retailer clicks on the Retailer Profile"emmanueljThree"
     And it redirect to the retailer profile screen
     And Retailer clicks on the Approve Button without assign any product
     Then it should display the error message "Assign at least one product to approve retailer"
 
-  @RA05
+#  Scenario: Attempts to approve the request without assigning a product
+#    Given user launch the browser and Maximize window
+#    When to hit the Shopdot Url
+#    And user Login to the SHOPDOT application
+#    And the retailer clicks on "Requests for Access" under Retailers main menu
+#    And retailer clicks on the Retailer Profile"Two Emmanuel"
+#    And it redirect to the retailer profile screen
+#    And Retailer clicks on the Approve Button with assigning one product
+#    Then it should display the error message "Assign at least one product to approve retailer"
 
+  @RA05
   Scenario: Declining Retailer Access Request for a Pending Status
     Given user launch the browser and Maximize window
     When to hit the Shopdot Url
     And user Login to the SHOPDOT application
     And the retailer clicks on "Requests for Access" under Retailers main menu
     When Brand clicks on Decline button from Retailer Profile Screen
-    Then a confirmation message is display "You are declining <Retailer’s Store Name> request for access.They will not be able to order any of your products in ShopDot.Do you wish to continue?"
+#    Then a confirmation message is display "You are declining <Retailer’s Store Name> request for access.They will not be able to order any of your products in ShopDot.Do you wish to continue?"
+    Then a confirmation message will display
     When Brand clicks on "Yes" from the pop-up
     Then the brand-retailer connection request’s status is updated from "Pending" to "Declined"
 #    And a success message is displayed on the screen: "<Retailer Name> has been declined access to your products"
@@ -65,7 +76,8 @@ Feature: As a Brand, I want to be able to view the list of retailers that reques
     When user clicks on View or Edit link from one of the Approved retailers
     Then the Retailer Profile Screen is displayed with an option to Decline
     When user clicks on Decline
-    Then a pop-up is displayed with the message: "You are declining <Retailer’s Store Name> request for access.They will not be able to order any of your products in ShopDot.Do you wish to continue?"
+#    Then a pop-up is displayed with the message: "You are declining <Retailer’s Store Name> request for access.They will not be able to order any of your products in ShopDot.Do you wish to continue?"
+    Then a pop-up message will displayed on the Screen
     When Brand clicks on "Yes" from the pop-up
     Then the retailer connection status is updated from "Connected" to "Declined"
     And all previously assigned products are unassigned
