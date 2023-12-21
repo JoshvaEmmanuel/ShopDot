@@ -5,6 +5,14 @@
 	<groupId>org.automation</groupId>
 	<artifactId>ShopdotApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<aspectj.version>1.7.4</aspectj.version>
+		<allure.version>1.4.22</allure.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
+
 	<dependencies>
 	<dependency>
     <groupId>io.github.bonigarcia</groupId>
@@ -103,18 +111,77 @@
 		
 
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.5.1</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/test-classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<testFailureIgnore>true</testFailureIgnore>
+					<argLine>
+						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+					</argLine>
+					<properties>
+						<property>
+							<name>listener</name>
+							<value>
+								ru.yandex.qatools.allure.testng.AllureTestListener</value>
+						</property>
+					</properties>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.10.v20150310</version>
+				<configuration>
+					<webAppSourceDirectory>
+						${project.build.directory}/site/allure-maven-plugin</webAppSourceDirectory>
+					<stopKey>stop</stopKey>
+					<stopPort>1234</stopPort>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 </project>
