@@ -7,8 +7,8 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features ="src/test/java/org/featurefies/brandPages", glue ={"org.setpdefinition","HooksClass"}, monochrome = true,dryRun = false,
-        plugin ={"pretty","html:target/Cucumber-HTML-report/report.html", "junit:target/Cucumber-junit/junitreport.xml", "json:target/Cucumber-Jason-report/jsonreport.json","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
-,tags = "@CR")
+        plugin ={"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
+,tags = "@RA06")
 
 
 public class TestRunnerClass_Brand {

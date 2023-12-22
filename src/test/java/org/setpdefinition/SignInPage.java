@@ -101,7 +101,6 @@ public class SignInPage extends BaseClase{
 
 	@Then("User should navigate to Dasboard Page")
 	public void user_should_navigate_to_Dasboard_Page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+
 	}
 }

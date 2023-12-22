@@ -135,7 +135,7 @@ public class ConnectedRetailer extends BaseClase {
         driver.findElement(By.xpath("//input[@placeholder='Search retailers']")).sendKeys(faker.name().firstName());
     }
 
-    @Then("the following message is displayed in the table “There are no approved retailers that meet your criteria”")
+    @Then("the following message is displayed in the table {string}")
     public void theFollowingMessageIsDisplayedInTheTableThereAreNoApprovedRetailersThatMeetYourCriteria(String text) {
 
        Assert.assertEquals(driver.findElement(By.xpath("//h3[normalize-space()='Currently you have no connected retailers.']")).getText().trim(), text);

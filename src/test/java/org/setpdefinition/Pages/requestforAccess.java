@@ -120,17 +120,15 @@ public class requestforAccess extends BaseClase {
     }
 
     @When("Brand clicks on Decline button from Retailer Profile Screen")
-    public void brandClicksOnDeclineButtonFromRetailerProfileScreen() {
+    public void brandClicksOnDeclineButtonFromRetailerProfileScreen() throws InterruptedException {
         driver.findElement(By.xpath("//a[normalize-space()='emmanueljThree']")).click();
-
+Thread.sleep(2000);
         String brandName = driver.findElement(By.xpath("(//div[@class='title'])[2]")).getText();
         log.info("RetailerName is: " + brandName);
 
         driver.findElement(By.xpath("//button[normalize-space()='Decline']")).click();
     }
 
-//    @Then("a confirmation message is display {string}")
-//    public void aConfirmationMessageIsDisplay(String DeclineError) {
         @Then("a confirmation message will display")
         public void aConfirmationMessageWillDisplay() {
 
@@ -145,11 +143,14 @@ public class requestforAccess extends BaseClase {
     }
 
     @Then("the brand-retailer connection request’s status is updated from {string} to {string}")
-    public void theBrandRetailerConnectionRequestSStatusIsUpdatedFromTo(String Pending, String Declined) {
-        String pending = driver.findElement(By.xpath("//span[@class='status-pill w-auto false pill_pending false']")).getText();
+    public void the_brand_retailer_connection_request_s_status_is_updated_from_to(String string, String string2) throws InterruptedException {
+
+        String pending = driver.findElement(By.xpath("//span[text()='Pending']")).getText();
         log.info("The Before Status is: " + pending);
+        Thread.sleep(3000);
         String decline = driver.findElement(By.xpath("//span[@class='status-pill w-auto false pill_pending false']")).getText();
         log.info("The After Status is: " + decline);
+
     }
 
     @And("a success message is displayed on the screen: {string}")
@@ -164,18 +165,11 @@ public class requestforAccess extends BaseClase {
         log.info(displayed);
         String declineenabled = driver.findElement(By.xpath("//button[normalize-space()='Decline']")).getText();
         log.info("The button is: " + declineenabled);
-
     }
-
     @When("user clicks on Decline")
     public void userClicksOnDecline() {
-
         driver.findElement(By.xpath("//button[normalize-space()='Decline']")).click();
     }
-
-//    @Then("a pop-up is displayed with the message: {string}")
-//    public void aPopUpIsDisplayedWithTheMessage(String poperror) {
-
         @Then("a pop-up message will displayed on the Screen")
         public void aPopUpMessageWillDisplayedOnTheScreen() {
             String declinerror = driver.findElement(By.xpath("//div[@class='popup_content']")).getText();

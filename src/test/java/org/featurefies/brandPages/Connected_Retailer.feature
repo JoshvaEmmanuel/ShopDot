@@ -49,7 +49,7 @@ Feature: As a Brand, I want to be able to view the list of retailers that I have
     And user Login to the SHOPDOT application
     Given Brand clicks on "Connected Retailers" option from Retailers menu
     When Brand enters non existing Retailer name in the search bar
-    Then the following message is displayed in the table “There are no approved retailers that meet your criteria”
+    Then the following message is displayed in the table "There are no approved retailers that meet your criteria"
 #    And the Application displays the result count (which is 0)
 
     @CR06

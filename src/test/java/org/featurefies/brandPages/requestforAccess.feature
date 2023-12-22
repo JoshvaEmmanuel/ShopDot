@@ -61,7 +61,6 @@ Feature: As a Brand, I want to be able to view the list of retailers that reques
     And user Login to the SHOPDOT application
     And the retailer clicks on "Requests for Access" under Retailers main menu
     When Brand clicks on Decline button from Retailer Profile Screen
-#    Then a confirmation message is display "You are declining <Retailer’s Store Name> request for access.They will not be able to order any of your products in ShopDot.Do you wish to continue?"
     Then a confirmation message will display
     When Brand clicks on "Yes" from the pop-up
     Then the brand-retailer connection request’s status is updated from "Pending" to "Declined"
@@ -76,7 +75,6 @@ Feature: As a Brand, I want to be able to view the list of retailers that reques
     When user clicks on View or Edit link from one of the Approved retailers
     Then the Retailer Profile Screen is displayed with an option to Decline
     When user clicks on Decline
-#    Then a pop-up is displayed with the message: "You are declining <Retailer’s Store Name> request for access.They will not be able to order any of your products in ShopDot.Do you wish to continue?"
     Then a pop-up message will displayed on the Screen
     When Brand clicks on "Yes" from the pop-up
     Then the retailer connection status is updated from "Connected" to "Declined"
