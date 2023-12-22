@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>4.8.0</version>
+			<version>7.0.0</version>
 		</dependency>
 
 
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>4.8.0</version>
+			<version>7.0.0</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-core</artifactId>
-			<version>4.8.0</version>
+			<version>7.0.0</version>
 		</dependency>
 
 
@@ -107,16 +107,28 @@
 			<version>1.0.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports-cucumber4-adapter -->
-		<dependency>
-			<groupId>com.aventstack</groupId>
-			<artifactId>extentreports-cucumber4-adapter</artifactId>
-			<version>1.2.1</version>
-		</dependency>
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
-			<version>5.0.1</version>
+			<version>5.0.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>klov-reporter</artifactId>
+			<version>5.0.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extent-pdf-report</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extentreports-cucumber7-adapter</artifactId>
+			<version>1.1.0</version>
 		</dependency>
 
 <!--		<dependency>-->

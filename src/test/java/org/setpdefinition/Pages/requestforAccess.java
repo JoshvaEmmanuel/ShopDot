@@ -5,7 +5,7 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import jdk.nashorn.internal.ir.IfNode;
+
 import org.Base.BaseClase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
